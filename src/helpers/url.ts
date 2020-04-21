@@ -10,3 +10,14 @@ export const getPostRelativePath = (slug?: string): string => {
         .join('/')
         .replace(/\/\//, '/')
 }
+
+export const getPageURLPrefix = (): string => {
+    return config.siteMetadata.pageURLPrefix || ''
+}
+
+export const getPageRelativePath = (slug?: string): string => {
+    return [getPageURLPrefix(), slug]
+        .filter(item => !!item)
+        .join('/')
+        .replace(/\/\//, '/')
+}
