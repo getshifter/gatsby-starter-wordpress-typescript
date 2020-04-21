@@ -1382,13 +1382,13 @@ export type SitePageConnectionGroupArgs = {
 };
 
 export type SitePageContext = {
-  title?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
-  title?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -1490,8 +1490,8 @@ export type SitePageFieldsEnum =
   'internal___owner' |
   'internal___type' |
   'isCreatedByStatefulCreatePages' |
-  'context___title' |
   'context___slug' |
+  'context___id' |
   'pluginCreator___id' |
   'pluginCreator___parent___id' |
   'pluginCreator___parent___parent___id' |
@@ -3241,3 +3241,17 @@ export type IndexQueryVariables = {};
 
 
 export type IndexQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug'> }> } };
+
+export type SinglePageQueryVariables = {
+  slug?: Maybe<Scalars['String']>;
+};
+
+
+export type SinglePageQuery = { wordpressPage?: Maybe<Pick<Wordpress__Page, 'id' | 'slug' | 'title' | 'content'>> };
+
+export type SinglePostQueryVariables = {
+  slug?: Maybe<Scalars['String']>;
+};
+
+
+export type SinglePostQuery = { wordpressPost?: Maybe<Pick<Wordpress__Post, 'id' | 'slug' | 'title' | 'content'>> };

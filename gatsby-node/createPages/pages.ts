@@ -23,18 +23,22 @@ export const createWPPages: GatsbyNode['createPages'] = async ({page, actions, g
                 node {
                     title
                     slug
+                    id
                 }
             }
         }
     }`)
 
-    pages.forEach(({node: page}) => {
-        const path = getPageRelativePath(page.slug)
-        console.log(`Page created: ${path} - ${page.title}`)
+    pages.forEach(({node: wpPage}) => {
+        const path = getPageRelativePath(wpPage.slug)
+        console.log(`Page created: ${path} - ${wpPage.title}`)
         actions.createPage({
             path,
             component: resolve("./src/pages/pages.tsx"),
-            context: page
+            context: Object.assign({}, page, {
+                slug: wpPage.slug,
+                id: wpPage.id
+            })
         })
     })
     console.log(pages.length)

@@ -23,6 +23,7 @@ export const createWPPosts: GatsbyNode['createPages'] = async ({page, actions, g
                 node {
                     title
                     slug
+                    id
                 }
             }
         }
@@ -34,7 +35,10 @@ export const createWPPosts: GatsbyNode['createPages'] = async ({page, actions, g
         actions.createPage({
             path,
             component: resolve("./src/pages/posts.tsx"),
-            context: page
+            context: Object.assign({}, page, {
+                slug: post.slug,
+                id: post.id
+            })
         })
     })
     console.log(posts.length)
