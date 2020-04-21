@@ -4,6 +4,7 @@ import Link from 'gatsby-link'
 import {
   IndexQuery
 } from '../../types/graphql-types'
+import { getPostRelativePath } from '../helpers/url'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -11,10 +12,13 @@ interface IndexPageProps {
   data: IndexQuery
 }
 
-const ListPostItem = ({title, excerpt}: {title?: string; excerpt?: string}) => {
+const ListPostItem = (props: IndexQuery['allWordpressPost']['edges'][number]['node']) => {
+  const {title, excerpt} = props;
+  const path = getPostRelativePath(props.slug)
   return (
     <section>
       <h2>{title}</h2>
+      <Link to={path}>Go</Link>
       <div dangerouslySetInnerHTML={{__html: excerpt}} />
     </section>
   )
@@ -53,6 +57,7 @@ export const pageQuery = graphql`
         node {
           title
           excerpt
+          slug
         }
       }
     }

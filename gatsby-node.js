@@ -5,8 +5,7 @@ require('ts-node').register({
     target: 'esnext',
   },
 })
-const nodes = require('./gatsby-node/index')
-
+const {nodes} = require('./gatsby-node/index')
 if (nodes) {
     Object.entries(nodes).forEach(([key, node]) => {
         exports[key] = node

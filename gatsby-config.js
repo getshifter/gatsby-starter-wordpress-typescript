@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `Gatsby Typescript Starter`,
+    postURLPrefix: 'news',
+    pageURLPrefix: '',
   },
   plugins: [
     `gatsby-plugin-typescript`,

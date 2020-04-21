@@ -1227,6 +1227,8 @@ export type SiteEdge = {
 export type SiteFieldsEnum = 
   'buildTime' |
   'siteMetadata___title' |
+  'siteMetadata___postURLPrefix' |
+  'siteMetadata___pageURLPrefix' |
   'port' |
   'host' |
   'polyfill' |
@@ -1882,10 +1884,14 @@ export type SitePluginSortInput = {
 
 export type SiteSiteMetadata = {
   title?: Maybe<Scalars['String']>;
+  postURLPrefix?: Maybe<Scalars['String']>;
+  pageURLPrefix?: Maybe<Scalars['String']>;
 };
 
 export type SiteSiteMetadataFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
+  postURLPrefix?: Maybe<StringQueryOperatorInput>;
+  pageURLPrefix?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SiteSortInput = {
@@ -3219,4 +3225,4 @@ export type Wordpress__Site_MetadataSortInput = {
 export type IndexQueryVariables = {};
 
 
-export type IndexQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt'> }> } };
+export type IndexQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug'> }> } };
