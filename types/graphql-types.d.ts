@@ -3260,7 +3260,7 @@ export type Unnamed_1_Query = { allWordpressPage: { edges: Array<{ node: Pick<Wo
 export type Unnamed_2_QueryVariables = {};
 
 
-export type Unnamed_2_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'name' | 'description' | 'url'>> };
+export type Unnamed_2_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'name'>> };
 
 export type IndexQueryVariables = {};
 
