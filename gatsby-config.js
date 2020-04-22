@@ -1,3 +1,4 @@
+
 module.exports = {
   siteMetadata: {
     postURLPrefix: 'news',
@@ -5,6 +6,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-typescript`,
+    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-plugin-graphql-codegen',
       options: {
@@ -48,6 +50,16 @@ module.exports = {
           "**/posts",
           "**/pages",
         ],
+        plugins: [
+          {
+            resolve: `gatsby-wordpress-inline-images`,
+            options:
+            {
+              baseUrl: "central.wordcamp.org",
+              protocol: `https`
+            }
+          }
+        ]
       },
     },
   ],

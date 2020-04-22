@@ -372,6 +372,9 @@ export type File = Node & {
   birthtime?: Maybe<Scalars['Date']>;
   /** @deprecated Use `birthTime` instead */
   birthtimeMs?: Maybe<Scalars['Float']>;
+  blksize?: Maybe<Scalars['Int']>;
+  blocks?: Maybe<Scalars['Int']>;
+  url?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -493,6 +496,9 @@ export type FileFieldsEnum =
   'ctime' |
   'birthtime' |
   'birthtimeMs' |
+  'blksize' |
+  'blocks' |
+  'url' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -612,6 +618,9 @@ export type FileFilterInput = {
   ctime?: Maybe<DateQueryOperatorInput>;
   birthtime?: Maybe<DateQueryOperatorInput>;
   birthtimeMs?: Maybe<FloatQueryOperatorInput>;
+  blksize?: Maybe<IntQueryOperatorInput>;
+  blocks?: Maybe<IntQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -761,6 +770,9 @@ export type QueryFileArgs = {
   ctime?: Maybe<DateQueryOperatorInput>;
   birthtime?: Maybe<DateQueryOperatorInput>;
   birthtimeMs?: Maybe<FloatQueryOperatorInput>;
+  blksize?: Maybe<IntQueryOperatorInput>;
+  blocks?: Maybe<IntQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -852,8 +864,6 @@ export type QueryAllSitePageArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -912,7 +922,6 @@ export type QueryWordpressPageArgs = {
   template?: Maybe<StringQueryOperatorInput>;
   meta?: Maybe<Wordpress__PageMetaFilterInput>;
   _links?: Maybe<Wordpress__Page_LinksFilterInput>;
-  parent_element?: Maybe<Wordpress__PageFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -950,7 +959,6 @@ export type QueryWordpressPostArgs = {
   meta?: Maybe<Wordpress__PostMetaFilterInput>;
   categories?: Maybe<IntQueryOperatorInput>;
   tags?: Maybe<IntQueryOperatorInput>;
-  jetpack_featured_media_url?: Maybe<StringQueryOperatorInput>;
   _links?: Maybe<Wordpress__Post_LinksFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
@@ -1011,6 +1019,7 @@ export type QuerySitePluginArgs = {
   version?: Maybe<StringQueryOperatorInput>;
   pluginOptions?: Maybe<SitePluginPluginOptionsFilterInput>;
   nodeAPIs?: Maybe<StringQueryOperatorInput>;
+  browserAPIs?: Maybe<StringQueryOperatorInput>;
   pluginFilepath?: Maybe<StringQueryOperatorInput>;
   packageJson?: Maybe<SitePluginPackageJsonFilterInput>;
 };
@@ -1026,8 +1035,6 @@ export type QueryAllSitePluginArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Int']>;
-  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -1229,8 +1236,6 @@ export type SiteFieldsEnum =
   'buildTime' |
   'siteMetadata___postURLPrefix' |
   'siteMetadata___pageURLPrefix' |
-  'port' |
-  'host' |
   'polyfill' |
   'pathPrefix' |
   'id' |
@@ -1323,8 +1328,6 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -1532,6 +1535,14 @@ export type SitePageFieldsEnum =
   'pluginCreator___resolve' |
   'pluginCreator___name' |
   'pluginCreator___version' |
+  'pluginCreator___pluginOptions___plugins' |
+  'pluginCreator___pluginOptions___plugins___resolve' |
+  'pluginCreator___pluginOptions___plugins___id' |
+  'pluginCreator___pluginOptions___plugins___name' |
+  'pluginCreator___pluginOptions___plugins___version' |
+  'pluginCreator___pluginOptions___plugins___nodeAPIs' |
+  'pluginCreator___pluginOptions___plugins___browserAPIs' |
+  'pluginCreator___pluginOptions___plugins___pluginFilepath' |
   'pluginCreator___pluginOptions___fileName' |
   'pluginCreator___pluginOptions___baseUrl' |
   'pluginCreator___pluginOptions___protocol' |
@@ -1541,9 +1552,15 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___verboseOutput' |
   'pluginCreator___pluginOptions___perPage' |
   'pluginCreator___pluginOptions___includedRoutes' |
+  'pluginCreator___pluginOptions___maxWidth' |
+  'pluginCreator___pluginOptions___wrapperStyle' |
+  'pluginCreator___pluginOptions___backgroundColor' |
+  'pluginCreator___pluginOptions___postTypes' |
+  'pluginCreator___pluginOptions___withWebp' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
+  'pluginCreator___browserAPIs' |
   'pluginCreator___pluginFilepath' |
   'pluginCreator___packageJson___name' |
   'pluginCreator___packageJson___description' |
@@ -1605,6 +1622,7 @@ export type SitePlugin = Node & {
   version?: Maybe<Scalars['String']>;
   pluginOptions?: Maybe<SitePluginPluginOptions>;
   nodeAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  browserAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
   pluginFilepath?: Maybe<Scalars['String']>;
   packageJson?: Maybe<SitePluginPackageJson>;
 };
@@ -1726,6 +1744,22 @@ export type SitePluginFieldsEnum =
   'resolve' |
   'name' |
   'version' |
+  'pluginOptions___plugins' |
+  'pluginOptions___plugins___resolve' |
+  'pluginOptions___plugins___id' |
+  'pluginOptions___plugins___name' |
+  'pluginOptions___plugins___version' |
+  'pluginOptions___plugins___pluginOptions___baseUrl' |
+  'pluginOptions___plugins___pluginOptions___protocol' |
+  'pluginOptions___plugins___pluginOptions___maxWidth' |
+  'pluginOptions___plugins___pluginOptions___wrapperStyle' |
+  'pluginOptions___plugins___pluginOptions___backgroundColor' |
+  'pluginOptions___plugins___pluginOptions___postTypes' |
+  'pluginOptions___plugins___pluginOptions___withWebp' |
+  'pluginOptions___plugins___pluginOptions___useACF' |
+  'pluginOptions___plugins___nodeAPIs' |
+  'pluginOptions___plugins___browserAPIs' |
+  'pluginOptions___plugins___pluginFilepath' |
   'pluginOptions___fileName' |
   'pluginOptions___baseUrl' |
   'pluginOptions___protocol' |
@@ -1735,9 +1769,15 @@ export type SitePluginFieldsEnum =
   'pluginOptions___verboseOutput' |
   'pluginOptions___perPage' |
   'pluginOptions___includedRoutes' |
+  'pluginOptions___maxWidth' |
+  'pluginOptions___wrapperStyle' |
+  'pluginOptions___backgroundColor' |
+  'pluginOptions___postTypes' |
+  'pluginOptions___withWebp' |
   'pluginOptions___path' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
+  'browserAPIs' |
   'pluginFilepath' |
   'packageJson___name' |
   'packageJson___description' |
@@ -1766,6 +1806,7 @@ export type SitePluginFilterInput = {
   version?: Maybe<StringQueryOperatorInput>;
   pluginOptions?: Maybe<SitePluginPluginOptionsFilterInput>;
   nodeAPIs?: Maybe<StringQueryOperatorInput>;
+  browserAPIs?: Maybe<StringQueryOperatorInput>;
   pluginFilepath?: Maybe<StringQueryOperatorInput>;
   packageJson?: Maybe<SitePluginPackageJsonFilterInput>;
 };
@@ -1848,6 +1889,7 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
+  plugins?: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
   fileName?: Maybe<Scalars['String']>;
   baseUrl?: Maybe<Scalars['String']>;
   protocol?: Maybe<Scalars['String']>;
@@ -1857,11 +1899,17 @@ export type SitePluginPluginOptions = {
   verboseOutput?: Maybe<Scalars['Boolean']>;
   perPage?: Maybe<Scalars['Int']>;
   includedRoutes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  maxWidth?: Maybe<Scalars['Int']>;
+  wrapperStyle?: Maybe<Scalars['String']>;
+  backgroundColor?: Maybe<Scalars['String']>;
+  postTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  withWebp?: Maybe<Scalars['Boolean']>;
   path?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
+  plugins?: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
   fileName?: Maybe<StringQueryOperatorInput>;
   baseUrl?: Maybe<StringQueryOperatorInput>;
   protocol?: Maybe<StringQueryOperatorInput>;
@@ -1871,8 +1919,61 @@ export type SitePluginPluginOptionsFilterInput = {
   verboseOutput?: Maybe<BooleanQueryOperatorInput>;
   perPage?: Maybe<IntQueryOperatorInput>;
   includedRoutes?: Maybe<StringQueryOperatorInput>;
+  maxWidth?: Maybe<IntQueryOperatorInput>;
+  wrapperStyle?: Maybe<StringQueryOperatorInput>;
+  backgroundColor?: Maybe<StringQueryOperatorInput>;
+  postTypes?: Maybe<StringQueryOperatorInput>;
+  withWebp?: Maybe<BooleanQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsPlugins = {
+  resolve?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptions>;
+  nodeAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  browserAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  pluginFilepath?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsPluginsFilterInput = {
+  resolve?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  version?: Maybe<StringQueryOperatorInput>;
+  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>;
+  nodeAPIs?: Maybe<StringQueryOperatorInput>;
+  browserAPIs?: Maybe<StringQueryOperatorInput>;
+  pluginFilepath?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsPluginsFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsPluginsFilterInput>;
+};
+
+export type SitePluginPluginOptionsPluginsPluginOptions = {
+  baseUrl?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
+  maxWidth?: Maybe<Scalars['Int']>;
+  wrapperStyle?: Maybe<Scalars['String']>;
+  backgroundColor?: Maybe<Scalars['String']>;
+  postTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  withWebp?: Maybe<Scalars['Boolean']>;
+  useACF?: Maybe<Scalars['Boolean']>;
+};
+
+export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
+  baseUrl?: Maybe<StringQueryOperatorInput>;
+  protocol?: Maybe<StringQueryOperatorInput>;
+  maxWidth?: Maybe<IntQueryOperatorInput>;
+  wrapperStyle?: Maybe<StringQueryOperatorInput>;
+  backgroundColor?: Maybe<StringQueryOperatorInput>;
+  postTypes?: Maybe<StringQueryOperatorInput>;
+  withWebp?: Maybe<BooleanQueryOperatorInput>;
+  useACF?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {
@@ -2078,7 +2179,6 @@ export type Wordpress__Page = Node & {
   template?: Maybe<Scalars['String']>;
   meta?: Maybe<Wordpress__PageMeta>;
   _links?: Maybe<Wordpress__Page_Links>;
-  parent_element?: Maybe<Wordpress__Page>;
   path?: Maybe<Scalars['String']>;
 };
 
@@ -2106,7 +2206,6 @@ export type Wordpress__Page_Links = {
   replies?: Maybe<Array<Maybe<Wordpress__Page_LinksReplies>>>;
   version_history?: Maybe<Array<Maybe<Wordpress__Page_LinksVersion_History>>>;
   predecessor_version?: Maybe<Array<Maybe<Wordpress__Page_LinksPredecessor_Version>>>;
-  up?: Maybe<Array<Maybe<Wordpress__Page_LinksUp>>>;
   wp_attachment?: Maybe<Array<Maybe<Wordpress__Page_LinksWp_Attachment>>>;
   curies?: Maybe<Array<Maybe<Wordpress__Page_LinksCuries>>>;
 };
@@ -2173,7 +2272,6 @@ export type Wordpress__Page_LinksFilterInput = {
   replies?: Maybe<Wordpress__Page_LinksRepliesFilterListInput>;
   version_history?: Maybe<Wordpress__Page_LinksVersion_HistoryFilterListInput>;
   predecessor_version?: Maybe<Wordpress__Page_LinksPredecessor_VersionFilterListInput>;
-  up?: Maybe<Wordpress__Page_LinksUpFilterListInput>;
   wp_attachment?: Maybe<Wordpress__Page_LinksWp_AttachmentFilterListInput>;
   curies?: Maybe<Wordpress__Page_LinksCuriesFilterListInput>;
 };
@@ -2216,20 +2314,6 @@ export type Wordpress__Page_LinksSelfFilterInput = {
 
 export type Wordpress__Page_LinksSelfFilterListInput = {
   elemMatch?: Maybe<Wordpress__Page_LinksSelfFilterInput>;
-};
-
-export type Wordpress__Page_LinksUp = {
-  embeddable?: Maybe<Scalars['Boolean']>;
-  href?: Maybe<Scalars['String']>;
-};
-
-export type Wordpress__Page_LinksUpFilterInput = {
-  embeddable?: Maybe<BooleanQueryOperatorInput>;
-  href?: Maybe<StringQueryOperatorInput>;
-};
-
-export type Wordpress__Page_LinksUpFilterListInput = {
-  elemMatch?: Maybe<Wordpress__Page_LinksUpFilterInput>;
 };
 
 export type Wordpress__Page_LinksVersion_History = {
@@ -2389,7 +2473,8 @@ export type Wordpress__PageFieldsEnum =
   'comment_status' |
   'ping_status' |
   'template' |
-  'meta___spay_email' |
+  'meta____locale' |
+  'meta____original_post' |
   '_links___self' |
   '_links___self___href' |
   '_links___collection' |
@@ -2408,162 +2493,12 @@ export type Wordpress__PageFieldsEnum =
   '_links___predecessor_version' |
   '_links___predecessor_version___wordpress_id' |
   '_links___predecessor_version___href' |
-  '_links___up' |
-  '_links___up___embeddable' |
-  '_links___up___href' |
   '_links___wp_attachment' |
   '_links___wp_attachment___href' |
   '_links___curies' |
   '_links___curies___name' |
   '_links___curies___href' |
   '_links___curies___templated' |
-  'parent_element___id' |
-  'parent_element___parent___id' |
-  'parent_element___parent___parent___id' |
-  'parent_element___parent___parent___children' |
-  'parent_element___parent___children' |
-  'parent_element___parent___children___id' |
-  'parent_element___parent___children___children' |
-  'parent_element___parent___internal___content' |
-  'parent_element___parent___internal___contentDigest' |
-  'parent_element___parent___internal___description' |
-  'parent_element___parent___internal___fieldOwners' |
-  'parent_element___parent___internal___ignoreType' |
-  'parent_element___parent___internal___mediaType' |
-  'parent_element___parent___internal___owner' |
-  'parent_element___parent___internal___type' |
-  'parent_element___children' |
-  'parent_element___children___id' |
-  'parent_element___children___parent___id' |
-  'parent_element___children___parent___children' |
-  'parent_element___children___children' |
-  'parent_element___children___children___id' |
-  'parent_element___children___children___children' |
-  'parent_element___children___internal___content' |
-  'parent_element___children___internal___contentDigest' |
-  'parent_element___children___internal___description' |
-  'parent_element___children___internal___fieldOwners' |
-  'parent_element___children___internal___ignoreType' |
-  'parent_element___children___internal___mediaType' |
-  'parent_element___children___internal___owner' |
-  'parent_element___children___internal___type' |
-  'parent_element___internal___content' |
-  'parent_element___internal___contentDigest' |
-  'parent_element___internal___description' |
-  'parent_element___internal___fieldOwners' |
-  'parent_element___internal___ignoreType' |
-  'parent_element___internal___mediaType' |
-  'parent_element___internal___owner' |
-  'parent_element___internal___type' |
-  'parent_element___wordpress_id' |
-  'parent_element___date' |
-  'parent_element___guid' |
-  'parent_element___modified' |
-  'parent_element___slug' |
-  'parent_element___status' |
-  'parent_element___type' |
-  'parent_element___link' |
-  'parent_element___title' |
-  'parent_element___content' |
-  'parent_element___excerpt' |
-  'parent_element___author' |
-  'parent_element___wordpress_parent' |
-  'parent_element___menu_order' |
-  'parent_element___comment_status' |
-  'parent_element___ping_status' |
-  'parent_element___template' |
-  'parent_element___meta___spay_email' |
-  'parent_element____links___self' |
-  'parent_element____links___self___href' |
-  'parent_element____links___collection' |
-  'parent_element____links___collection___href' |
-  'parent_element____links___about' |
-  'parent_element____links___about___href' |
-  'parent_element____links___author' |
-  'parent_element____links___author___embeddable' |
-  'parent_element____links___author___href' |
-  'parent_element____links___replies' |
-  'parent_element____links___replies___embeddable' |
-  'parent_element____links___replies___href' |
-  'parent_element____links___version_history' |
-  'parent_element____links___version_history___count' |
-  'parent_element____links___version_history___href' |
-  'parent_element____links___predecessor_version' |
-  'parent_element____links___predecessor_version___wordpress_id' |
-  'parent_element____links___predecessor_version___href' |
-  'parent_element____links___up' |
-  'parent_element____links___up___embeddable' |
-  'parent_element____links___up___href' |
-  'parent_element____links___wp_attachment' |
-  'parent_element____links___wp_attachment___href' |
-  'parent_element____links___curies' |
-  'parent_element____links___curies___name' |
-  'parent_element____links___curies___href' |
-  'parent_element____links___curies___templated' |
-  'parent_element___parent_element___id' |
-  'parent_element___parent_element___parent___id' |
-  'parent_element___parent_element___parent___children' |
-  'parent_element___parent_element___children' |
-  'parent_element___parent_element___children___id' |
-  'parent_element___parent_element___children___children' |
-  'parent_element___parent_element___internal___content' |
-  'parent_element___parent_element___internal___contentDigest' |
-  'parent_element___parent_element___internal___description' |
-  'parent_element___parent_element___internal___fieldOwners' |
-  'parent_element___parent_element___internal___ignoreType' |
-  'parent_element___parent_element___internal___mediaType' |
-  'parent_element___parent_element___internal___owner' |
-  'parent_element___parent_element___internal___type' |
-  'parent_element___parent_element___wordpress_id' |
-  'parent_element___parent_element___date' |
-  'parent_element___parent_element___guid' |
-  'parent_element___parent_element___modified' |
-  'parent_element___parent_element___slug' |
-  'parent_element___parent_element___status' |
-  'parent_element___parent_element___type' |
-  'parent_element___parent_element___link' |
-  'parent_element___parent_element___title' |
-  'parent_element___parent_element___content' |
-  'parent_element___parent_element___excerpt' |
-  'parent_element___parent_element___author' |
-  'parent_element___parent_element___wordpress_parent' |
-  'parent_element___parent_element___menu_order' |
-  'parent_element___parent_element___comment_status' |
-  'parent_element___parent_element___ping_status' |
-  'parent_element___parent_element___template' |
-  'parent_element___parent_element___meta___spay_email' |
-  'parent_element___parent_element____links___self' |
-  'parent_element___parent_element____links___collection' |
-  'parent_element___parent_element____links___about' |
-  'parent_element___parent_element____links___author' |
-  'parent_element___parent_element____links___replies' |
-  'parent_element___parent_element____links___version_history' |
-  'parent_element___parent_element____links___predecessor_version' |
-  'parent_element___parent_element____links___up' |
-  'parent_element___parent_element____links___wp_attachment' |
-  'parent_element___parent_element____links___curies' |
-  'parent_element___parent_element___parent_element___id' |
-  'parent_element___parent_element___parent_element___children' |
-  'parent_element___parent_element___parent_element___wordpress_id' |
-  'parent_element___parent_element___parent_element___date' |
-  'parent_element___parent_element___parent_element___guid' |
-  'parent_element___parent_element___parent_element___modified' |
-  'parent_element___parent_element___parent_element___slug' |
-  'parent_element___parent_element___parent_element___status' |
-  'parent_element___parent_element___parent_element___type' |
-  'parent_element___parent_element___parent_element___link' |
-  'parent_element___parent_element___parent_element___title' |
-  'parent_element___parent_element___parent_element___content' |
-  'parent_element___parent_element___parent_element___excerpt' |
-  'parent_element___parent_element___parent_element___author' |
-  'parent_element___parent_element___parent_element___wordpress_parent' |
-  'parent_element___parent_element___parent_element___menu_order' |
-  'parent_element___parent_element___parent_element___comment_status' |
-  'parent_element___parent_element___parent_element___ping_status' |
-  'parent_element___parent_element___parent_element___template' |
-  'parent_element___parent_element___parent_element___path' |
-  'parent_element___parent_element___path' |
-  'parent_element___path' |
   'path';
 
 export type Wordpress__PageFilterInput = {
@@ -2590,7 +2525,6 @@ export type Wordpress__PageFilterInput = {
   template?: Maybe<StringQueryOperatorInput>;
   meta?: Maybe<Wordpress__PageMetaFilterInput>;
   _links?: Maybe<Wordpress__Page_LinksFilterInput>;
-  parent_element?: Maybe<Wordpress__PageFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2604,11 +2538,13 @@ export type Wordpress__PageGroupConnection = {
 };
 
 export type Wordpress__PageMeta = {
-  spay_email?: Maybe<Scalars['String']>;
+  _locale?: Maybe<Scalars['String']>;
+  _original_post?: Maybe<Scalars['String']>;
 };
 
 export type Wordpress__PageMetaFilterInput = {
-  spay_email?: Maybe<StringQueryOperatorInput>;
+  _locale?: Maybe<StringQueryOperatorInput>;
+  _original_post?: Maybe<StringQueryOperatorInput>;
 };
 
 export type Wordpress__PageSortInput = {
@@ -2641,7 +2577,6 @@ export type Wordpress__Post = Node & {
   meta?: Maybe<Wordpress__PostMeta>;
   categories?: Maybe<Array<Maybe<Scalars['Int']>>>;
   tags?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  jetpack_featured_media_url?: Maybe<Scalars['String']>;
   _links?: Maybe<Wordpress__Post_Links>;
   path?: Maybe<Scalars['String']>;
 };
@@ -2971,11 +2906,10 @@ export type Wordpress__PostFieldsEnum =
   'sticky' |
   'template' |
   'format' |
-  'meta___spay_email' |
-  'meta___jetpack_publicize_message' |
+  'meta____locale' |
+  'meta____original_post' |
   'categories' |
   'tags' |
-  'jetpack_featured_media_url' |
   '_links___self' |
   '_links___self___href' |
   '_links___collection' |
@@ -3034,7 +2968,6 @@ export type Wordpress__PostFilterInput = {
   meta?: Maybe<Wordpress__PostMetaFilterInput>;
   categories?: Maybe<IntQueryOperatorInput>;
   tags?: Maybe<IntQueryOperatorInput>;
-  jetpack_featured_media_url?: Maybe<StringQueryOperatorInput>;
   _links?: Maybe<Wordpress__Post_LinksFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
@@ -3049,13 +2982,13 @@ export type Wordpress__PostGroupConnection = {
 };
 
 export type Wordpress__PostMeta = {
-  spay_email?: Maybe<Scalars['String']>;
-  jetpack_publicize_message?: Maybe<Scalars['String']>;
+  _locale?: Maybe<Scalars['String']>;
+  _original_post?: Maybe<Scalars['String']>;
 };
 
 export type Wordpress__PostMetaFilterInput = {
-  spay_email?: Maybe<StringQueryOperatorInput>;
-  jetpack_publicize_message?: Maybe<StringQueryOperatorInput>;
+  _locale?: Maybe<StringQueryOperatorInput>;
+  _original_post?: Maybe<StringQueryOperatorInput>;
 };
 
 export type Wordpress__PostSortInput = {
