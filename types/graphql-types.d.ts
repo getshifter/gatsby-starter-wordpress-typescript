@@ -841,15 +841,15 @@ export type QuerySitePageArgs = {
   internalComponentName?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   matchPath?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>;
   context?: Maybe<SitePageContextFilterInput>;
   pluginCreator?: Maybe<SitePluginFilterInput>;
   pluginCreatorId?: Maybe<StringQueryOperatorInput>;
   componentPath?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
 };
 
 
@@ -864,8 +864,8 @@ export type QueryAllSitePageArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  polyfill?: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix?: Maybe<StringQueryOperatorInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -922,6 +922,7 @@ export type QueryWordpressPageArgs = {
   template?: Maybe<StringQueryOperatorInput>;
   meta?: Maybe<Wordpress__PageMetaFilterInput>;
   _links?: Maybe<Wordpress__Page_LinksFilterInput>;
+  parent_element?: Maybe<Wordpress__PageFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -959,6 +960,7 @@ export type QueryWordpressPostArgs = {
   meta?: Maybe<Wordpress__PostMetaFilterInput>;
   categories?: Maybe<IntQueryOperatorInput>;
   tags?: Maybe<IntQueryOperatorInput>;
+  jetpack_featured_media_url?: Maybe<StringQueryOperatorInput>;
   _links?: Maybe<Wordpress__Post_LinksFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
@@ -1035,8 +1037,8 @@ export type QueryAllSitePluginArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  polyfill?: Maybe<Scalars['Boolean']>;
-  pathPrefix?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['Int']>;
+  host?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1236,8 +1238,8 @@ export type SiteFieldsEnum =
   'buildTime' |
   'siteMetadata___postURLPrefix' |
   'siteMetadata___pageURLPrefix' |
-  'polyfill' |
-  'pathPrefix' |
+  'port' |
+  'host' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -1328,8 +1330,8 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  polyfill?: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix?: Maybe<StringQueryOperatorInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1351,15 +1353,15 @@ export type SitePage = Node & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  parent?: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
   isCreatedByStatefulCreatePages?: Maybe<Scalars['Boolean']>;
   context?: Maybe<SitePageContext>;
   pluginCreator?: Maybe<SitePlugin>;
   pluginCreatorId?: Maybe<Scalars['String']>;
   componentPath?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
 };
 
 export type SitePageConnection = {
@@ -1405,92 +1407,6 @@ export type SitePageFieldsEnum =
   'internalComponentName' |
   'componentChunkName' |
   'matchPath' |
-  'id' |
-  'parent___id' |
-  'parent___parent___id' |
-  'parent___parent___parent___id' |
-  'parent___parent___parent___children' |
-  'parent___parent___children' |
-  'parent___parent___children___id' |
-  'parent___parent___children___children' |
-  'parent___parent___internal___content' |
-  'parent___parent___internal___contentDigest' |
-  'parent___parent___internal___description' |
-  'parent___parent___internal___fieldOwners' |
-  'parent___parent___internal___ignoreType' |
-  'parent___parent___internal___mediaType' |
-  'parent___parent___internal___owner' |
-  'parent___parent___internal___type' |
-  'parent___children' |
-  'parent___children___id' |
-  'parent___children___parent___id' |
-  'parent___children___parent___children' |
-  'parent___children___children' |
-  'parent___children___children___id' |
-  'parent___children___children___children' |
-  'parent___children___internal___content' |
-  'parent___children___internal___contentDigest' |
-  'parent___children___internal___description' |
-  'parent___children___internal___fieldOwners' |
-  'parent___children___internal___ignoreType' |
-  'parent___children___internal___mediaType' |
-  'parent___children___internal___owner' |
-  'parent___children___internal___type' |
-  'parent___internal___content' |
-  'parent___internal___contentDigest' |
-  'parent___internal___description' |
-  'parent___internal___fieldOwners' |
-  'parent___internal___ignoreType' |
-  'parent___internal___mediaType' |
-  'parent___internal___owner' |
-  'parent___internal___type' |
-  'children' |
-  'children___id' |
-  'children___parent___id' |
-  'children___parent___parent___id' |
-  'children___parent___parent___children' |
-  'children___parent___children' |
-  'children___parent___children___id' |
-  'children___parent___children___children' |
-  'children___parent___internal___content' |
-  'children___parent___internal___contentDigest' |
-  'children___parent___internal___description' |
-  'children___parent___internal___fieldOwners' |
-  'children___parent___internal___ignoreType' |
-  'children___parent___internal___mediaType' |
-  'children___parent___internal___owner' |
-  'children___parent___internal___type' |
-  'children___children' |
-  'children___children___id' |
-  'children___children___parent___id' |
-  'children___children___parent___children' |
-  'children___children___children' |
-  'children___children___children___id' |
-  'children___children___children___children' |
-  'children___children___internal___content' |
-  'children___children___internal___contentDigest' |
-  'children___children___internal___description' |
-  'children___children___internal___fieldOwners' |
-  'children___children___internal___ignoreType' |
-  'children___children___internal___mediaType' |
-  'children___children___internal___owner' |
-  'children___children___internal___type' |
-  'children___internal___content' |
-  'children___internal___contentDigest' |
-  'children___internal___description' |
-  'children___internal___fieldOwners' |
-  'children___internal___ignoreType' |
-  'children___internal___mediaType' |
-  'children___internal___owner' |
-  'children___internal___type' |
-  'internal___content' |
-  'internal___contentDigest' |
-  'internal___description' |
-  'internal___fieldOwners' |
-  'internal___ignoreType' |
-  'internal___mediaType' |
-  'internal___owner' |
-  'internal___type' |
   'isCreatedByStatefulCreatePages' |
   'context___slug' |
   'context___id' |
@@ -1579,7 +1495,93 @@ export type SitePageFieldsEnum =
   'pluginCreator___packageJson___peerDependencies___version' |
   'pluginCreator___packageJson___keywords' |
   'pluginCreatorId' |
-  'componentPath';
+  'componentPath' |
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type';
 
 export type SitePageFilterInput = {
   path?: Maybe<StringQueryOperatorInput>;
@@ -1587,15 +1589,15 @@ export type SitePageFilterInput = {
   internalComponentName?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   matchPath?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>;
   context?: Maybe<SitePageContextFilterInput>;
   pluginCreator?: Maybe<SitePluginFilterInput>;
   pluginCreatorId?: Maybe<StringQueryOperatorInput>;
   componentPath?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
 };
 
 export type SitePageGroupConnection = {
@@ -2179,6 +2181,7 @@ export type Wordpress__Page = Node & {
   template?: Maybe<Scalars['String']>;
   meta?: Maybe<Wordpress__PageMeta>;
   _links?: Maybe<Wordpress__Page_Links>;
+  parent_element?: Maybe<Wordpress__Page>;
   path?: Maybe<Scalars['String']>;
 };
 
@@ -2206,6 +2209,7 @@ export type Wordpress__Page_Links = {
   replies?: Maybe<Array<Maybe<Wordpress__Page_LinksReplies>>>;
   version_history?: Maybe<Array<Maybe<Wordpress__Page_LinksVersion_History>>>;
   predecessor_version?: Maybe<Array<Maybe<Wordpress__Page_LinksPredecessor_Version>>>;
+  up?: Maybe<Array<Maybe<Wordpress__Page_LinksUp>>>;
   wp_attachment?: Maybe<Array<Maybe<Wordpress__Page_LinksWp_Attachment>>>;
   curies?: Maybe<Array<Maybe<Wordpress__Page_LinksCuries>>>;
 };
@@ -2272,6 +2276,7 @@ export type Wordpress__Page_LinksFilterInput = {
   replies?: Maybe<Wordpress__Page_LinksRepliesFilterListInput>;
   version_history?: Maybe<Wordpress__Page_LinksVersion_HistoryFilterListInput>;
   predecessor_version?: Maybe<Wordpress__Page_LinksPredecessor_VersionFilterListInput>;
+  up?: Maybe<Wordpress__Page_LinksUpFilterListInput>;
   wp_attachment?: Maybe<Wordpress__Page_LinksWp_AttachmentFilterListInput>;
   curies?: Maybe<Wordpress__Page_LinksCuriesFilterListInput>;
 };
@@ -2314,6 +2319,20 @@ export type Wordpress__Page_LinksSelfFilterInput = {
 
 export type Wordpress__Page_LinksSelfFilterListInput = {
   elemMatch?: Maybe<Wordpress__Page_LinksSelfFilterInput>;
+};
+
+export type Wordpress__Page_LinksUp = {
+  embeddable?: Maybe<Scalars['Boolean']>;
+  href?: Maybe<Scalars['String']>;
+};
+
+export type Wordpress__Page_LinksUpFilterInput = {
+  embeddable?: Maybe<BooleanQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+};
+
+export type Wordpress__Page_LinksUpFilterListInput = {
+  elemMatch?: Maybe<Wordpress__Page_LinksUpFilterInput>;
 };
 
 export type Wordpress__Page_LinksVersion_History = {
@@ -2473,8 +2492,7 @@ export type Wordpress__PageFieldsEnum =
   'comment_status' |
   'ping_status' |
   'template' |
-  'meta____locale' |
-  'meta____original_post' |
+  'meta___spay_email' |
   '_links___self' |
   '_links___self___href' |
   '_links___collection' |
@@ -2493,12 +2511,162 @@ export type Wordpress__PageFieldsEnum =
   '_links___predecessor_version' |
   '_links___predecessor_version___wordpress_id' |
   '_links___predecessor_version___href' |
+  '_links___up' |
+  '_links___up___embeddable' |
+  '_links___up___href' |
   '_links___wp_attachment' |
   '_links___wp_attachment___href' |
   '_links___curies' |
   '_links___curies___name' |
   '_links___curies___href' |
   '_links___curies___templated' |
+  'parent_element___id' |
+  'parent_element___parent___id' |
+  'parent_element___parent___parent___id' |
+  'parent_element___parent___parent___children' |
+  'parent_element___parent___children' |
+  'parent_element___parent___children___id' |
+  'parent_element___parent___children___children' |
+  'parent_element___parent___internal___content' |
+  'parent_element___parent___internal___contentDigest' |
+  'parent_element___parent___internal___description' |
+  'parent_element___parent___internal___fieldOwners' |
+  'parent_element___parent___internal___ignoreType' |
+  'parent_element___parent___internal___mediaType' |
+  'parent_element___parent___internal___owner' |
+  'parent_element___parent___internal___type' |
+  'parent_element___children' |
+  'parent_element___children___id' |
+  'parent_element___children___parent___id' |
+  'parent_element___children___parent___children' |
+  'parent_element___children___children' |
+  'parent_element___children___children___id' |
+  'parent_element___children___children___children' |
+  'parent_element___children___internal___content' |
+  'parent_element___children___internal___contentDigest' |
+  'parent_element___children___internal___description' |
+  'parent_element___children___internal___fieldOwners' |
+  'parent_element___children___internal___ignoreType' |
+  'parent_element___children___internal___mediaType' |
+  'parent_element___children___internal___owner' |
+  'parent_element___children___internal___type' |
+  'parent_element___internal___content' |
+  'parent_element___internal___contentDigest' |
+  'parent_element___internal___description' |
+  'parent_element___internal___fieldOwners' |
+  'parent_element___internal___ignoreType' |
+  'parent_element___internal___mediaType' |
+  'parent_element___internal___owner' |
+  'parent_element___internal___type' |
+  'parent_element___wordpress_id' |
+  'parent_element___date' |
+  'parent_element___guid' |
+  'parent_element___modified' |
+  'parent_element___slug' |
+  'parent_element___status' |
+  'parent_element___type' |
+  'parent_element___link' |
+  'parent_element___title' |
+  'parent_element___content' |
+  'parent_element___excerpt' |
+  'parent_element___author' |
+  'parent_element___wordpress_parent' |
+  'parent_element___menu_order' |
+  'parent_element___comment_status' |
+  'parent_element___ping_status' |
+  'parent_element___template' |
+  'parent_element___meta___spay_email' |
+  'parent_element____links___self' |
+  'parent_element____links___self___href' |
+  'parent_element____links___collection' |
+  'parent_element____links___collection___href' |
+  'parent_element____links___about' |
+  'parent_element____links___about___href' |
+  'parent_element____links___author' |
+  'parent_element____links___author___embeddable' |
+  'parent_element____links___author___href' |
+  'parent_element____links___replies' |
+  'parent_element____links___replies___embeddable' |
+  'parent_element____links___replies___href' |
+  'parent_element____links___version_history' |
+  'parent_element____links___version_history___count' |
+  'parent_element____links___version_history___href' |
+  'parent_element____links___predecessor_version' |
+  'parent_element____links___predecessor_version___wordpress_id' |
+  'parent_element____links___predecessor_version___href' |
+  'parent_element____links___up' |
+  'parent_element____links___up___embeddable' |
+  'parent_element____links___up___href' |
+  'parent_element____links___wp_attachment' |
+  'parent_element____links___wp_attachment___href' |
+  'parent_element____links___curies' |
+  'parent_element____links___curies___name' |
+  'parent_element____links___curies___href' |
+  'parent_element____links___curies___templated' |
+  'parent_element___parent_element___id' |
+  'parent_element___parent_element___parent___id' |
+  'parent_element___parent_element___parent___children' |
+  'parent_element___parent_element___children' |
+  'parent_element___parent_element___children___id' |
+  'parent_element___parent_element___children___children' |
+  'parent_element___parent_element___internal___content' |
+  'parent_element___parent_element___internal___contentDigest' |
+  'parent_element___parent_element___internal___description' |
+  'parent_element___parent_element___internal___fieldOwners' |
+  'parent_element___parent_element___internal___ignoreType' |
+  'parent_element___parent_element___internal___mediaType' |
+  'parent_element___parent_element___internal___owner' |
+  'parent_element___parent_element___internal___type' |
+  'parent_element___parent_element___wordpress_id' |
+  'parent_element___parent_element___date' |
+  'parent_element___parent_element___guid' |
+  'parent_element___parent_element___modified' |
+  'parent_element___parent_element___slug' |
+  'parent_element___parent_element___status' |
+  'parent_element___parent_element___type' |
+  'parent_element___parent_element___link' |
+  'parent_element___parent_element___title' |
+  'parent_element___parent_element___content' |
+  'parent_element___parent_element___excerpt' |
+  'parent_element___parent_element___author' |
+  'parent_element___parent_element___wordpress_parent' |
+  'parent_element___parent_element___menu_order' |
+  'parent_element___parent_element___comment_status' |
+  'parent_element___parent_element___ping_status' |
+  'parent_element___parent_element___template' |
+  'parent_element___parent_element___meta___spay_email' |
+  'parent_element___parent_element____links___self' |
+  'parent_element___parent_element____links___collection' |
+  'parent_element___parent_element____links___about' |
+  'parent_element___parent_element____links___author' |
+  'parent_element___parent_element____links___replies' |
+  'parent_element___parent_element____links___version_history' |
+  'parent_element___parent_element____links___predecessor_version' |
+  'parent_element___parent_element____links___up' |
+  'parent_element___parent_element____links___wp_attachment' |
+  'parent_element___parent_element____links___curies' |
+  'parent_element___parent_element___parent_element___id' |
+  'parent_element___parent_element___parent_element___children' |
+  'parent_element___parent_element___parent_element___wordpress_id' |
+  'parent_element___parent_element___parent_element___date' |
+  'parent_element___parent_element___parent_element___guid' |
+  'parent_element___parent_element___parent_element___modified' |
+  'parent_element___parent_element___parent_element___slug' |
+  'parent_element___parent_element___parent_element___status' |
+  'parent_element___parent_element___parent_element___type' |
+  'parent_element___parent_element___parent_element___link' |
+  'parent_element___parent_element___parent_element___title' |
+  'parent_element___parent_element___parent_element___content' |
+  'parent_element___parent_element___parent_element___excerpt' |
+  'parent_element___parent_element___parent_element___author' |
+  'parent_element___parent_element___parent_element___wordpress_parent' |
+  'parent_element___parent_element___parent_element___menu_order' |
+  'parent_element___parent_element___parent_element___comment_status' |
+  'parent_element___parent_element___parent_element___ping_status' |
+  'parent_element___parent_element___parent_element___template' |
+  'parent_element___parent_element___parent_element___path' |
+  'parent_element___parent_element___path' |
+  'parent_element___path' |
   'path';
 
 export type Wordpress__PageFilterInput = {
@@ -2525,6 +2693,7 @@ export type Wordpress__PageFilterInput = {
   template?: Maybe<StringQueryOperatorInput>;
   meta?: Maybe<Wordpress__PageMetaFilterInput>;
   _links?: Maybe<Wordpress__Page_LinksFilterInput>;
+  parent_element?: Maybe<Wordpress__PageFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2538,13 +2707,11 @@ export type Wordpress__PageGroupConnection = {
 };
 
 export type Wordpress__PageMeta = {
-  _locale?: Maybe<Scalars['String']>;
-  _original_post?: Maybe<Scalars['String']>;
+  spay_email?: Maybe<Scalars['String']>;
 };
 
 export type Wordpress__PageMetaFilterInput = {
-  _locale?: Maybe<StringQueryOperatorInput>;
-  _original_post?: Maybe<StringQueryOperatorInput>;
+  spay_email?: Maybe<StringQueryOperatorInput>;
 };
 
 export type Wordpress__PageSortInput = {
@@ -2577,6 +2744,7 @@ export type Wordpress__Post = Node & {
   meta?: Maybe<Wordpress__PostMeta>;
   categories?: Maybe<Array<Maybe<Scalars['Int']>>>;
   tags?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  jetpack_featured_media_url?: Maybe<Scalars['String']>;
   _links?: Maybe<Wordpress__Post_Links>;
   path?: Maybe<Scalars['String']>;
 };
@@ -2906,10 +3074,11 @@ export type Wordpress__PostFieldsEnum =
   'sticky' |
   'template' |
   'format' |
-  'meta____locale' |
-  'meta____original_post' |
+  'meta___spay_email' |
+  'meta___jetpack_publicize_message' |
   'categories' |
   'tags' |
+  'jetpack_featured_media_url' |
   '_links___self' |
   '_links___self___href' |
   '_links___collection' |
@@ -2968,6 +3137,7 @@ export type Wordpress__PostFilterInput = {
   meta?: Maybe<Wordpress__PostMetaFilterInput>;
   categories?: Maybe<IntQueryOperatorInput>;
   tags?: Maybe<IntQueryOperatorInput>;
+  jetpack_featured_media_url?: Maybe<StringQueryOperatorInput>;
   _links?: Maybe<Wordpress__Post_LinksFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
@@ -2982,13 +3152,13 @@ export type Wordpress__PostGroupConnection = {
 };
 
 export type Wordpress__PostMeta = {
-  _locale?: Maybe<Scalars['String']>;
-  _original_post?: Maybe<Scalars['String']>;
+  spay_email?: Maybe<Scalars['String']>;
+  jetpack_publicize_message?: Maybe<Scalars['String']>;
 };
 
 export type Wordpress__PostMetaFilterInput = {
-  _locale?: Maybe<StringQueryOperatorInput>;
-  _original_post?: Maybe<StringQueryOperatorInput>;
+  spay_email?: Maybe<StringQueryOperatorInput>;
+  jetpack_publicize_message?: Maybe<StringQueryOperatorInput>;
 };
 
 export type Wordpress__PostSortInput = {
@@ -3164,7 +3334,7 @@ export type Unnamed_2_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Si
 export type IndexQueryVariables = {};
 
 
-export type IndexQuery = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'id' | 'home' | 'description' | 'name' | 'url'>>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug'> }> } };
+export type IndexQuery = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'id' | 'home' | 'description' | 'name' | 'url'>>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug' | 'date' | 'modified'> }> } };
 
 export type SinglePageQueryVariables = {
   slug?: Maybe<Scalars['String']>;

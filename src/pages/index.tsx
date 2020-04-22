@@ -27,6 +27,12 @@ const ListPostItem = (props: IndexQuery['allWordpressPost']['edges'][number]['no
   return (
     <Col sm={6} className="clearfix p-5">
       <h2><Link to={path}>{title}</Link></h2>
+      <p>
+        <small>
+          On: {props.date} <br />
+          Last modified: {props.modified}
+        </small>
+        </p>
       <div dangerouslySetInnerHTML={{__html: excerpt}} />
       <Button
         tag={Link}
@@ -71,6 +77,8 @@ export const pageQuery = graphql`
           title
           excerpt
           slug
+          date(formatString: "MMMM Do YYYY")
+          modified(formatString: "MMMM Do YYYY")
         }
       }
     }
