@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-typescript",
-  "description": "Gatsby TypeScript starter",
+  "name": "gatsby-starter-wordpress-typescript",
+  "description": "Gatsby TypeScript starter for WordPress site",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Shifter Team <hello@getshifter.io>",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "gatsby": "^2.20.27",
@@ -17,7 +17,7 @@
     "typescript": "^3.8.3"
   },
   "keywords": [
-    "gatsby, typescript"
+    "gatsby, typescript", "wordpress"
   ],
   "license": "MIT",
   "main": "n/a",
@@ -39,6 +39,7 @@
   },
   "contributors": [
     "fabien0102 <fabien0102@gmail.com>",
-    "Hays Clark <hays.clark@gmail.com>"
+    "Hays Clark <hays.clark@gmail.com>",
+    "hideokamoto <hide.okamoto@digitalcube.jp>"
   ]
 }

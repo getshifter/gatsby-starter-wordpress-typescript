@@ -1,4 +1,4 @@
-# gatsby-starter-typescript
+# gatsby-starter-wordpress-typescript
 The starter theme of Gatsby site with WordPress (Using WP API).
 
 Install this starter (assuming Gatsby is installed) by running from your CLI:
