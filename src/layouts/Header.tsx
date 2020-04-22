@@ -11,7 +11,6 @@ export default () => {
   query {
     wordpressSiteMetadata {
       name
-      url
     }
   }`)
   return (

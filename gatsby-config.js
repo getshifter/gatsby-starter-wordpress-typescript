@@ -12,6 +12,7 @@ module.exports = {
         fileName: `types/graphql-types.d.ts`
       }
     },
+    "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-source-wordpress",
       options: {

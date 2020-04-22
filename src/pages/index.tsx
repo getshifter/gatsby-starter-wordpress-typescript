@@ -2,6 +2,9 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import {
+  Helmet
+} from 'react-helmet'
+import {
   Row,
   Col,
   Button,
@@ -47,6 +50,9 @@ export default ({data}: IndexPageProps) => {
   const {edges } = data.allWordpressPost
     return (
       <Layout>
+        <Helmet
+          title={data.wordpressSiteMetadata.name}
+        />
         <Jumbotron
           title={data.wordpressSiteMetadata.name}
           lead={data.wordpressSiteMetadata.description}
