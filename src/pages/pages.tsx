@@ -4,17 +4,18 @@ import {RouteComponentProps} from "@reach/router"
 import {
   SinglePageQuery
 } from '../../types/graphql-types'
+import Layout from '../layouts/index'
 
 type Props = RouteComponentProps & {
   data: SinglePageQuery
 }
 const Component: React.FC<Props> = (props) => {
   return (
-    <div>
+    <Layout>
       <h1 dangerouslySetInnerHTML={{__html: props.data.wordpressPage.title}} />
       <section dangerouslySetInnerHTML={{__html: props.data.wordpressPage.content}} />
       <Link to='/'>Home</Link>
-    </div>
+    </Layout>
   )
 }
 export default Component

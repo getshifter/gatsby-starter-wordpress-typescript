@@ -2,10 +2,10 @@ import { GatsbyNode } from "gatsby";
 import {resolve} from 'path'
 import {
     Wordpress__Page
-} from '../../types/graphql-types'
+} from '../../../types/graphql-types'
 import {
     getPageRelativePath,
-} from '../../src/helpers/url'
+} from '../../../src/helpers/url'
 
 export const createWPPages: GatsbyNode['createPages'] = async ({page, actions, graphql}) => {
     const {data: {

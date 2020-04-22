@@ -5,6 +5,7 @@ import {
   IndexQuery
 } from '../../types/graphql-types'
 import { getPostRelativePath } from '../helpers/url'
+import Layout from '../layouts/index'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -31,7 +32,7 @@ const ListPosts = ({edges}: IndexQuery['allWordpressPost']) => {
 export default ({data}: IndexPageProps) => {
   const {edges } = data.allWordpressPost
     return (
-      <div>
+      <Layout>
         <h1>Hi people</h1>
         <p> 
           Welcome to your new{' '}
@@ -40,7 +41,7 @@ export default ({data}: IndexPageProps) => {
         <ListPosts edges={edges} />
         <p>Now go build something great.</p>
         <Link to="/page-2/">Go to page 2</Link>
-      </div>
+      </Layout>
     )
   }
 

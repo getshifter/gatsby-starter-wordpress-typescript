@@ -1,13 +1,30 @@
 import * as React from 'react'
 import Link from 'gatsby-link'
-import Helmet from 'react-helmet'
 
 import './index.css'
+import { useStaticQuery, graphql } from 'gatsby'
+import { Wordpress__Site_Metadata } from '../../types/graphql-types'
 
-const Header = () => (
+const Header = () => {
+  const {wordpressSiteMetadata: {
+    name,
+    description
+  }} = useStaticQuery<{
+    wordpressSiteMetadata : Wordpress__Site_Metadata
+  }>(graphql`
+  query {
+    wordpressSiteMetadata {
+      id
+      home
+      description
+      name
+      url
+    }
+  }`)
+  return (
   <div
     style={{
-      background: 'rebeccapurple',
+      background: 'deepskyblue',
       marginBottom: '1.45rem',
     }}
   >
@@ -18,53 +35,41 @@ const Header = () => (
         padding: '1.45rem 1.0875rem',
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <h1 style={{ margin: 0, color: "#f5f5f5" }}>
         <Link
           to="/"
           style={{
-            color: 'white',
+            color: '#f5f5f5',
             textDecoration: 'none',
           }}
         >
-          Gatsby
-        </Link>
+          {name}
+        </Link><br/>
+        <small>{description}</small>
       </h1>
     </div>
   </div>
 )
+}
 
 interface DefaultLayoutProps extends React.HTMLProps<HTMLDivElement> {
-  location: {
-    pathname: string
-  }
   children: any
 }
 
-class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
-  public render() {
-    return (
-      <div>
-        <Helmet
-          title="Gatsby Default Starter"
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        />
-        <Header />
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0,
-          }}
-        >
-          {this.props.children()}
-        </div>
+export default (props: DefaultLayoutProps) => {
+  return (
+    <div>
+      <Header />
+      <div
+        style={{
+          margin: '0 auto',
+          maxWidth: 960,
+          padding: '0px 1.0875rem 1.45rem',
+          paddingTop: 0,
+        }}
+      >
+        {props.children}
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default DefaultLayout
