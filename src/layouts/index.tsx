@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'gatsby-link'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Wordpress__Site_Metadata } from '../../types/graphql-types'
