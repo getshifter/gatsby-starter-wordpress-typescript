@@ -5,7 +5,8 @@ import {
   IndexQuery
 } from '../../types/graphql-types'
 import { getPostRelativePath } from '../helpers/url'
-import Layout from '../layouts/index'
+import Main from '../components/Main'
+import Jumbotron from '../components/Jumbotron'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -32,16 +33,22 @@ const ListPosts = ({edges}: IndexQuery['allWordpressPost']) => {
 export default ({data}: IndexPageProps) => {
   const {edges } = data.allWordpressPost
     return (
-      <Layout>
-        <h1>Hi people</h1>
-        <p> 
-          Welcome to your new{' '}
-          <strong>{data.site.siteMetadata.title}</strong> site.
-        </p>
-        <ListPosts edges={edges} />
-        <p>Now go build something great.</p>
-        <Link to="/page-2/">Go to page 2</Link>
-      </Layout>
+      <div>
+        <Jumbotron
+          title={data.wordpressSiteMetadata.name}
+          lead={data.wordpressSiteMetadata.description}
+        />
+        <Main>
+          <h1>Hi people</h1>
+          <p> 
+            Welcome to your new{' '}
+            <strong>{data.site.siteMetadata.title}</strong> site.
+          </p>
+          <ListPosts edges={edges} />
+          <p>Now go build something great.</p>
+          <Link to="/page-2/">Go to page 2</Link>
+        </Main>
+      </div>
     )
   }
 
@@ -52,6 +59,13 @@ export const pageQuery = graphql`
       siteMetadata {
         title
       }
+    }
+    wordpressSiteMetadata {
+      id
+      home
+      description
+      name
+      url
     }
     allWordpressPost {
       edges {

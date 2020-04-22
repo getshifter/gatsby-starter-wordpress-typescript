@@ -5,6 +5,8 @@ import {
   SinglePostQuery
 } from '../../types/graphql-types'
 import Layout from '../layouts/index'
+import Jumbotron from '../components/Jumbotron'
+import Main from '../components/Main'
 
 type Props = RouteComponentProps & {
   data: SinglePostQuery
@@ -12,9 +14,12 @@ type Props = RouteComponentProps & {
 const Component: React.FC<Props> = (props) => {
   return (
     <Layout>
+    <Jumbotron title={props.data.wordpressPost.title} />
+    <Main>
       <h1 dangerouslySetInnerHTML={{__html: props.data.wordpressPost.title}} />
       <section dangerouslySetInnerHTML={{__html: props.data.wordpressPost.content}} />
       <Link to='/'>Home</Link>
+    </Main>
     </Layout>
   )
 }

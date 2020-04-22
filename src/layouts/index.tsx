@@ -8,15 +8,11 @@ import { Wordpress__Site_Metadata } from '../../types/graphql-types'
 const Header = () => {
   const {wordpressSiteMetadata: {
     name,
-    description
   }} = useStaticQuery<{
     wordpressSiteMetadata : Wordpress__Site_Metadata
   }>(graphql`
   query {
     wordpressSiteMetadata {
-      id
-      home
-      description
       name
       url
     }
@@ -25,7 +21,6 @@ const Header = () => {
   <div
     style={{
       background: 'deepskyblue',
-      marginBottom: '1.45rem',
     }}
   >
     <div
@@ -44,8 +39,7 @@ const Header = () => {
           }}
         >
           {name}
-        </Link><br/>
-        <small>{description}</small>
+        </Link>
       </h1>
     </div>
   </div>
@@ -60,16 +54,7 @@ export default (props: DefaultLayoutProps) => {
   return (
     <div>
       <Header />
-      <div
-        style={{
-          margin: '0 auto',
-          maxWidth: 960,
-          padding: '0px 1.0875rem 1.45rem',
-          paddingTop: 0,
-        }}
-      >
-        {props.children}
-      </div>
+      {props.children}
     </div>
   )
 }
