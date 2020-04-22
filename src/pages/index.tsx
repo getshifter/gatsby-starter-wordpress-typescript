@@ -13,6 +13,7 @@ import { getPostRelativePath } from '../helpers/url'
 import Main from '../components/Main'
 import Jumbotron from '../components/Jumbotron'
 import Footer from '../layouts/Footer'
+import Layout from '../layouts/index'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -39,7 +40,7 @@ const ListPostItem = (props: IndexQuery['allWordpressPost']['edges'][number]['no
 export default ({data}: IndexPageProps) => {
   const {edges } = data.allWordpressPost
     return (
-      <div>
+      <Layout>
         <Jumbotron
           title={data.wordpressSiteMetadata.name}
           lead={data.wordpressSiteMetadata.description}
@@ -50,7 +51,7 @@ export default ({data}: IndexPageProps) => {
           </Row>
         </Main>
         <Footer />
-      </div>
+      </Layout>
     )
   }
 
