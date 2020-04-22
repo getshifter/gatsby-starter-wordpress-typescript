@@ -911,8 +911,8 @@ export type QueryWordpressPageArgs = {
   ping_status?: Maybe<StringQueryOperatorInput>;
   template?: Maybe<StringQueryOperatorInput>;
   meta?: Maybe<Wordpress__PageMetaFilterInput>;
-  parent_element?: Maybe<Wordpress__PageFilterInput>;
   _links?: Maybe<Wordpress__Page_LinksFilterInput>;
+  parent_element?: Maybe<Wordpress__PageFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -1227,7 +1227,6 @@ export type SiteEdge = {
 
 export type SiteFieldsEnum = 
   'buildTime' |
-  'siteMetadata___title' |
   'siteMetadata___postURLPrefix' |
   'siteMetadata___pageURLPrefix' |
   'port' |
@@ -1541,8 +1540,6 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___useACF' |
   'pluginCreator___pluginOptions___verboseOutput' |
   'pluginCreator___pluginOptions___perPage' |
-  'pluginCreator___pluginOptions___searchAndReplaceContentUrls___sourceUrl' |
-  'pluginCreator___pluginOptions___searchAndReplaceContentUrls___replacementUrl' |
   'pluginCreator___pluginOptions___includedRoutes' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___pathCheck' |
@@ -1737,8 +1734,6 @@ export type SitePluginFieldsEnum =
   'pluginOptions___useACF' |
   'pluginOptions___verboseOutput' |
   'pluginOptions___perPage' |
-  'pluginOptions___searchAndReplaceContentUrls___sourceUrl' |
-  'pluginOptions___searchAndReplaceContentUrls___replacementUrl' |
   'pluginOptions___includedRoutes' |
   'pluginOptions___path' |
   'pluginOptions___pathCheck' |
@@ -1861,7 +1856,6 @@ export type SitePluginPluginOptions = {
   useACF?: Maybe<Scalars['Boolean']>;
   verboseOutput?: Maybe<Scalars['Boolean']>;
   perPage?: Maybe<Scalars['Int']>;
-  searchAndReplaceContentUrls?: Maybe<SitePluginPluginOptionsSearchAndReplaceContentUrls>;
   includedRoutes?: Maybe<Array<Maybe<Scalars['String']>>>;
   path?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
@@ -1876,20 +1870,9 @@ export type SitePluginPluginOptionsFilterInput = {
   useACF?: Maybe<BooleanQueryOperatorInput>;
   verboseOutput?: Maybe<BooleanQueryOperatorInput>;
   perPage?: Maybe<IntQueryOperatorInput>;
-  searchAndReplaceContentUrls?: Maybe<SitePluginPluginOptionsSearchAndReplaceContentUrlsFilterInput>;
   includedRoutes?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
-};
-
-export type SitePluginPluginOptionsSearchAndReplaceContentUrls = {
-  sourceUrl?: Maybe<Scalars['String']>;
-  replacementUrl?: Maybe<Scalars['String']>;
-};
-
-export type SitePluginPluginOptionsSearchAndReplaceContentUrlsFilterInput = {
-  sourceUrl?: Maybe<StringQueryOperatorInput>;
-  replacementUrl?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {
@@ -1898,13 +1881,11 @@ export type SitePluginSortInput = {
 };
 
 export type SiteSiteMetadata = {
-  title?: Maybe<Scalars['String']>;
   postURLPrefix?: Maybe<Scalars['String']>;
   pageURLPrefix?: Maybe<Scalars['String']>;
 };
 
 export type SiteSiteMetadataFilterInput = {
-  title?: Maybe<StringQueryOperatorInput>;
   postURLPrefix?: Maybe<StringQueryOperatorInput>;
   pageURLPrefix?: Maybe<StringQueryOperatorInput>;
 };
@@ -2096,8 +2077,8 @@ export type Wordpress__Page = Node & {
   ping_status?: Maybe<Scalars['String']>;
   template?: Maybe<Scalars['String']>;
   meta?: Maybe<Wordpress__PageMeta>;
-  parent_element?: Maybe<Wordpress__Page>;
   _links?: Maybe<Wordpress__Page_Links>;
+  parent_element?: Maybe<Wordpress__Page>;
   path?: Maybe<Scalars['String']>;
 };
 
@@ -2409,6 +2390,33 @@ export type Wordpress__PageFieldsEnum =
   'ping_status' |
   'template' |
   'meta___spay_email' |
+  '_links___self' |
+  '_links___self___href' |
+  '_links___collection' |
+  '_links___collection___href' |
+  '_links___about' |
+  '_links___about___href' |
+  '_links___author' |
+  '_links___author___embeddable' |
+  '_links___author___href' |
+  '_links___replies' |
+  '_links___replies___embeddable' |
+  '_links___replies___href' |
+  '_links___version_history' |
+  '_links___version_history___count' |
+  '_links___version_history___href' |
+  '_links___predecessor_version' |
+  '_links___predecessor_version___wordpress_id' |
+  '_links___predecessor_version___href' |
+  '_links___up' |
+  '_links___up___embeddable' |
+  '_links___up___href' |
+  '_links___wp_attachment' |
+  '_links___wp_attachment___href' |
+  '_links___curies' |
+  '_links___curies___name' |
+  '_links___curies___href' |
+  '_links___curies___templated' |
   'parent_element___id' |
   'parent_element___parent___id' |
   'parent_element___parent___parent___id' |
@@ -2465,6 +2473,33 @@ export type Wordpress__PageFieldsEnum =
   'parent_element___ping_status' |
   'parent_element___template' |
   'parent_element___meta___spay_email' |
+  'parent_element____links___self' |
+  'parent_element____links___self___href' |
+  'parent_element____links___collection' |
+  'parent_element____links___collection___href' |
+  'parent_element____links___about' |
+  'parent_element____links___about___href' |
+  'parent_element____links___author' |
+  'parent_element____links___author___embeddable' |
+  'parent_element____links___author___href' |
+  'parent_element____links___replies' |
+  'parent_element____links___replies___embeddable' |
+  'parent_element____links___replies___href' |
+  'parent_element____links___version_history' |
+  'parent_element____links___version_history___count' |
+  'parent_element____links___version_history___href' |
+  'parent_element____links___predecessor_version' |
+  'parent_element____links___predecessor_version___wordpress_id' |
+  'parent_element____links___predecessor_version___href' |
+  'parent_element____links___up' |
+  'parent_element____links___up___embeddable' |
+  'parent_element____links___up___href' |
+  'parent_element____links___wp_attachment' |
+  'parent_element____links___wp_attachment___href' |
+  'parent_element____links___curies' |
+  'parent_element____links___curies___name' |
+  'parent_element____links___curies___href' |
+  'parent_element____links___curies___templated' |
   'parent_element___parent_element___id' |
   'parent_element___parent_element___parent___id' |
   'parent_element___parent_element___parent___children' |
@@ -2497,6 +2532,16 @@ export type Wordpress__PageFieldsEnum =
   'parent_element___parent_element___ping_status' |
   'parent_element___parent_element___template' |
   'parent_element___parent_element___meta___spay_email' |
+  'parent_element___parent_element____links___self' |
+  'parent_element___parent_element____links___collection' |
+  'parent_element___parent_element____links___about' |
+  'parent_element___parent_element____links___author' |
+  'parent_element___parent_element____links___replies' |
+  'parent_element___parent_element____links___version_history' |
+  'parent_element___parent_element____links___predecessor_version' |
+  'parent_element___parent_element____links___up' |
+  'parent_element___parent_element____links___wp_attachment' |
+  'parent_element___parent_element____links___curies' |
   'parent_element___parent_element___parent_element___id' |
   'parent_element___parent_element___parent_element___children' |
   'parent_element___parent_element___parent_element___wordpress_id' |
@@ -2517,72 +2562,8 @@ export type Wordpress__PageFieldsEnum =
   'parent_element___parent_element___parent_element___ping_status' |
   'parent_element___parent_element___parent_element___template' |
   'parent_element___parent_element___parent_element___path' |
-  'parent_element___parent_element____links___self' |
-  'parent_element___parent_element____links___collection' |
-  'parent_element___parent_element____links___about' |
-  'parent_element___parent_element____links___author' |
-  'parent_element___parent_element____links___replies' |
-  'parent_element___parent_element____links___version_history' |
-  'parent_element___parent_element____links___predecessor_version' |
-  'parent_element___parent_element____links___up' |
-  'parent_element___parent_element____links___wp_attachment' |
-  'parent_element___parent_element____links___curies' |
   'parent_element___parent_element___path' |
-  'parent_element____links___self' |
-  'parent_element____links___self___href' |
-  'parent_element____links___collection' |
-  'parent_element____links___collection___href' |
-  'parent_element____links___about' |
-  'parent_element____links___about___href' |
-  'parent_element____links___author' |
-  'parent_element____links___author___embeddable' |
-  'parent_element____links___author___href' |
-  'parent_element____links___replies' |
-  'parent_element____links___replies___embeddable' |
-  'parent_element____links___replies___href' |
-  'parent_element____links___version_history' |
-  'parent_element____links___version_history___count' |
-  'parent_element____links___version_history___href' |
-  'parent_element____links___predecessor_version' |
-  'parent_element____links___predecessor_version___wordpress_id' |
-  'parent_element____links___predecessor_version___href' |
-  'parent_element____links___up' |
-  'parent_element____links___up___embeddable' |
-  'parent_element____links___up___href' |
-  'parent_element____links___wp_attachment' |
-  'parent_element____links___wp_attachment___href' |
-  'parent_element____links___curies' |
-  'parent_element____links___curies___name' |
-  'parent_element____links___curies___href' |
-  'parent_element____links___curies___templated' |
   'parent_element___path' |
-  '_links___self' |
-  '_links___self___href' |
-  '_links___collection' |
-  '_links___collection___href' |
-  '_links___about' |
-  '_links___about___href' |
-  '_links___author' |
-  '_links___author___embeddable' |
-  '_links___author___href' |
-  '_links___replies' |
-  '_links___replies___embeddable' |
-  '_links___replies___href' |
-  '_links___version_history' |
-  '_links___version_history___count' |
-  '_links___version_history___href' |
-  '_links___predecessor_version' |
-  '_links___predecessor_version___wordpress_id' |
-  '_links___predecessor_version___href' |
-  '_links___up' |
-  '_links___up___embeddable' |
-  '_links___up___href' |
-  '_links___wp_attachment' |
-  '_links___wp_attachment___href' |
-  '_links___curies' |
-  '_links___curies___name' |
-  '_links___curies___href' |
-  '_links___curies___templated' |
   'path';
 
 export type Wordpress__PageFilterInput = {
@@ -2608,8 +2589,8 @@ export type Wordpress__PageFilterInput = {
   ping_status?: Maybe<StringQueryOperatorInput>;
   template?: Maybe<StringQueryOperatorInput>;
   meta?: Maybe<Wordpress__PageMetaFilterInput>;
-  parent_element?: Maybe<Wordpress__PageFilterInput>;
   _links?: Maybe<Wordpress__Page_LinksFilterInput>;
+  parent_element?: Maybe<Wordpress__PageFilterInput>;
   path?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -3250,7 +3231,7 @@ export type Unnamed_2_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Si
 export type IndexQueryVariables = {};
 
 
-export type IndexQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'id' | 'home' | 'description' | 'name' | 'url'>>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug'> }> } };
+export type IndexQuery = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'id' | 'home' | 'description' | 'name' | 'url'>>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug'> }> } };
 
 export type SinglePageQueryVariables = {
   slug?: Maybe<Scalars['String']>;

@@ -1,6 +1,5 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Typescript Starter`,
     postURLPrefix: 'news',
     pageURLPrefix: '',
   },
@@ -41,10 +40,10 @@ module.exports = {
         // Set how many pages are retrieved per API request.
         perPage: 100,
         // Search and Replace Urls across WordPress content.
-        searchAndReplaceContentUrls: {
-          sourceUrl: "https://central.wordcamp.org",
-          replacementUrl: "https://localhost:8000",
-        },
+        // searchAndReplaceContentUrls: {
+        //   sourceUrl: "https://central.wordcamp.org",
+        //   replacementUrl: "https://localhost:8000",
+        // },
         includedRoutes: [
           "**/posts",
           "**/pages",
