@@ -372,9 +372,6 @@ export type File = Node & {
   birthtime?: Maybe<Scalars['Date']>;
   /** @deprecated Use `birthTime` instead */
   birthtimeMs?: Maybe<Scalars['Float']>;
-  blksize?: Maybe<Scalars['Int']>;
-  blocks?: Maybe<Scalars['Int']>;
-  url?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -496,9 +493,6 @@ export type FileFieldsEnum =
   'ctime' |
   'birthtime' |
   'birthtimeMs' |
-  'blksize' |
-  'blocks' |
-  'url' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -618,9 +612,6 @@ export type FileFilterInput = {
   ctime?: Maybe<DateQueryOperatorInput>;
   birthtime?: Maybe<DateQueryOperatorInput>;
   birthtimeMs?: Maybe<FloatQueryOperatorInput>;
-  blksize?: Maybe<IntQueryOperatorInput>;
-  blocks?: Maybe<IntQueryOperatorInput>;
-  url?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -770,9 +761,6 @@ export type QueryFileArgs = {
   ctime?: Maybe<DateQueryOperatorInput>;
   birthtime?: Maybe<DateQueryOperatorInput>;
   birthtimeMs?: Maybe<FloatQueryOperatorInput>;
-  blksize?: Maybe<IntQueryOperatorInput>;
-  blocks?: Maybe<IntQueryOperatorInput>;
-  url?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -841,15 +829,15 @@ export type QuerySitePageArgs = {
   internalComponentName?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   matchPath?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>;
   context?: Maybe<SitePageContextFilterInput>;
   pluginCreator?: Maybe<SitePluginFilterInput>;
   pluginCreatorId?: Maybe<StringQueryOperatorInput>;
   componentPath?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
 };
 
 
@@ -866,6 +854,8 @@ export type QuerySiteArgs = {
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
   port?: Maybe<IntQueryOperatorInput>;
   host?: Maybe<StringQueryOperatorInput>;
+  polyfill?: Maybe<BooleanQueryOperatorInput>;
+  pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1022,6 +1012,7 @@ export type QuerySitePluginArgs = {
   pluginOptions?: Maybe<SitePluginPluginOptionsFilterInput>;
   nodeAPIs?: Maybe<StringQueryOperatorInput>;
   browserAPIs?: Maybe<StringQueryOperatorInput>;
+  ssrAPIs?: Maybe<StringQueryOperatorInput>;
   pluginFilepath?: Maybe<StringQueryOperatorInput>;
   packageJson?: Maybe<SitePluginPackageJsonFilterInput>;
 };
@@ -1039,6 +1030,8 @@ export type Site = Node & {
   siteMetadata?: Maybe<SiteSiteMetadata>;
   port?: Maybe<Scalars['Int']>;
   host?: Maybe<Scalars['String']>;
+  polyfill?: Maybe<Scalars['Boolean']>;
+  pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1240,6 +1233,8 @@ export type SiteFieldsEnum =
   'siteMetadata___pageURLPrefix' |
   'port' |
   'host' |
+  'polyfill' |
+  'pathPrefix' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -1332,6 +1327,8 @@ export type SiteFilterInput = {
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
   port?: Maybe<IntQueryOperatorInput>;
   host?: Maybe<StringQueryOperatorInput>;
+  polyfill?: Maybe<BooleanQueryOperatorInput>;
+  pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1353,15 +1350,15 @@ export type SitePage = Node & {
   internalComponentName: Scalars['String'];
   componentChunkName: Scalars['String'];
   matchPath?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
   isCreatedByStatefulCreatePages?: Maybe<Scalars['Boolean']>;
   context?: Maybe<SitePageContext>;
   pluginCreator?: Maybe<SitePlugin>;
   pluginCreatorId?: Maybe<Scalars['String']>;
   componentPath?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  parent?: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
 };
 
 export type SitePageConnection = {
@@ -1407,95 +1404,6 @@ export type SitePageFieldsEnum =
   'internalComponentName' |
   'componentChunkName' |
   'matchPath' |
-  'isCreatedByStatefulCreatePages' |
-  'context___slug' |
-  'context___id' |
-  'pluginCreator___id' |
-  'pluginCreator___parent___id' |
-  'pluginCreator___parent___parent___id' |
-  'pluginCreator___parent___parent___children' |
-  'pluginCreator___parent___children' |
-  'pluginCreator___parent___children___id' |
-  'pluginCreator___parent___children___children' |
-  'pluginCreator___parent___internal___content' |
-  'pluginCreator___parent___internal___contentDigest' |
-  'pluginCreator___parent___internal___description' |
-  'pluginCreator___parent___internal___fieldOwners' |
-  'pluginCreator___parent___internal___ignoreType' |
-  'pluginCreator___parent___internal___mediaType' |
-  'pluginCreator___parent___internal___owner' |
-  'pluginCreator___parent___internal___type' |
-  'pluginCreator___children' |
-  'pluginCreator___children___id' |
-  'pluginCreator___children___parent___id' |
-  'pluginCreator___children___parent___children' |
-  'pluginCreator___children___children' |
-  'pluginCreator___children___children___id' |
-  'pluginCreator___children___children___children' |
-  'pluginCreator___children___internal___content' |
-  'pluginCreator___children___internal___contentDigest' |
-  'pluginCreator___children___internal___description' |
-  'pluginCreator___children___internal___fieldOwners' |
-  'pluginCreator___children___internal___ignoreType' |
-  'pluginCreator___children___internal___mediaType' |
-  'pluginCreator___children___internal___owner' |
-  'pluginCreator___children___internal___type' |
-  'pluginCreator___internal___content' |
-  'pluginCreator___internal___contentDigest' |
-  'pluginCreator___internal___description' |
-  'pluginCreator___internal___fieldOwners' |
-  'pluginCreator___internal___ignoreType' |
-  'pluginCreator___internal___mediaType' |
-  'pluginCreator___internal___owner' |
-  'pluginCreator___internal___type' |
-  'pluginCreator___resolve' |
-  'pluginCreator___name' |
-  'pluginCreator___version' |
-  'pluginCreator___pluginOptions___plugins' |
-  'pluginCreator___pluginOptions___plugins___resolve' |
-  'pluginCreator___pluginOptions___plugins___id' |
-  'pluginCreator___pluginOptions___plugins___name' |
-  'pluginCreator___pluginOptions___plugins___version' |
-  'pluginCreator___pluginOptions___plugins___nodeAPIs' |
-  'pluginCreator___pluginOptions___plugins___browserAPIs' |
-  'pluginCreator___pluginOptions___plugins___pluginFilepath' |
-  'pluginCreator___pluginOptions___fileName' |
-  'pluginCreator___pluginOptions___baseUrl' |
-  'pluginCreator___pluginOptions___protocol' |
-  'pluginCreator___pluginOptions___restApiRoutePrefix' |
-  'pluginCreator___pluginOptions___hostingWPCOM' |
-  'pluginCreator___pluginOptions___useACF' |
-  'pluginCreator___pluginOptions___verboseOutput' |
-  'pluginCreator___pluginOptions___perPage' |
-  'pluginCreator___pluginOptions___includedRoutes' |
-  'pluginCreator___pluginOptions___maxWidth' |
-  'pluginCreator___pluginOptions___wrapperStyle' |
-  'pluginCreator___pluginOptions___backgroundColor' |
-  'pluginCreator___pluginOptions___postTypes' |
-  'pluginCreator___pluginOptions___withWebp' |
-  'pluginCreator___pluginOptions___path' |
-  'pluginCreator___pluginOptions___pathCheck' |
-  'pluginCreator___nodeAPIs' |
-  'pluginCreator___browserAPIs' |
-  'pluginCreator___pluginFilepath' |
-  'pluginCreator___packageJson___name' |
-  'pluginCreator___packageJson___description' |
-  'pluginCreator___packageJson___version' |
-  'pluginCreator___packageJson___main' |
-  'pluginCreator___packageJson___author' |
-  'pluginCreator___packageJson___license' |
-  'pluginCreator___packageJson___dependencies' |
-  'pluginCreator___packageJson___dependencies___name' |
-  'pluginCreator___packageJson___dependencies___version' |
-  'pluginCreator___packageJson___devDependencies' |
-  'pluginCreator___packageJson___devDependencies___name' |
-  'pluginCreator___packageJson___devDependencies___version' |
-  'pluginCreator___packageJson___peerDependencies' |
-  'pluginCreator___packageJson___peerDependencies___name' |
-  'pluginCreator___packageJson___peerDependencies___version' |
-  'pluginCreator___packageJson___keywords' |
-  'pluginCreatorId' |
-  'componentPath' |
   'id' |
   'parent___id' |
   'parent___parent___id' |
@@ -1581,7 +1489,90 @@ export type SitePageFieldsEnum =
   'internal___ignoreType' |
   'internal___mediaType' |
   'internal___owner' |
-  'internal___type';
+  'internal___type' |
+  'isCreatedByStatefulCreatePages' |
+  'context___slug' |
+  'context___id' |
+  'pluginCreator___id' |
+  'pluginCreator___parent___id' |
+  'pluginCreator___parent___parent___id' |
+  'pluginCreator___parent___parent___children' |
+  'pluginCreator___parent___children' |
+  'pluginCreator___parent___children___id' |
+  'pluginCreator___parent___children___children' |
+  'pluginCreator___parent___internal___content' |
+  'pluginCreator___parent___internal___contentDigest' |
+  'pluginCreator___parent___internal___description' |
+  'pluginCreator___parent___internal___fieldOwners' |
+  'pluginCreator___parent___internal___ignoreType' |
+  'pluginCreator___parent___internal___mediaType' |
+  'pluginCreator___parent___internal___owner' |
+  'pluginCreator___parent___internal___type' |
+  'pluginCreator___children' |
+  'pluginCreator___children___id' |
+  'pluginCreator___children___parent___id' |
+  'pluginCreator___children___parent___children' |
+  'pluginCreator___children___children' |
+  'pluginCreator___children___children___id' |
+  'pluginCreator___children___children___children' |
+  'pluginCreator___children___internal___content' |
+  'pluginCreator___children___internal___contentDigest' |
+  'pluginCreator___children___internal___description' |
+  'pluginCreator___children___internal___fieldOwners' |
+  'pluginCreator___children___internal___ignoreType' |
+  'pluginCreator___children___internal___mediaType' |
+  'pluginCreator___children___internal___owner' |
+  'pluginCreator___children___internal___type' |
+  'pluginCreator___internal___content' |
+  'pluginCreator___internal___contentDigest' |
+  'pluginCreator___internal___description' |
+  'pluginCreator___internal___fieldOwners' |
+  'pluginCreator___internal___ignoreType' |
+  'pluginCreator___internal___mediaType' |
+  'pluginCreator___internal___owner' |
+  'pluginCreator___internal___type' |
+  'pluginCreator___resolve' |
+  'pluginCreator___name' |
+  'pluginCreator___version' |
+  'pluginCreator___pluginOptions___fileName' |
+  'pluginCreator___pluginOptions___baseUrl' |
+  'pluginCreator___pluginOptions___protocol' |
+  'pluginCreator___pluginOptions___restApiRoutePrefix' |
+  'pluginCreator___pluginOptions___hostingWPCOM' |
+  'pluginCreator___pluginOptions___useACF' |
+  'pluginCreator___pluginOptions___verboseOutput' |
+  'pluginCreator___pluginOptions___perPage' |
+  'pluginCreator___pluginOptions___includedRoutes' |
+  'pluginCreator___pluginOptions___name' |
+  'pluginCreator___pluginOptions___short_name' |
+  'pluginCreator___pluginOptions___start_url' |
+  'pluginCreator___pluginOptions___background_color' |
+  'pluginCreator___pluginOptions___theme_color' |
+  'pluginCreator___pluginOptions___display' |
+  'pluginCreator___pluginOptions___path' |
+  'pluginCreator___pluginOptions___pathCheck' |
+  'pluginCreator___nodeAPIs' |
+  'pluginCreator___browserAPIs' |
+  'pluginCreator___ssrAPIs' |
+  'pluginCreator___pluginFilepath' |
+  'pluginCreator___packageJson___name' |
+  'pluginCreator___packageJson___description' |
+  'pluginCreator___packageJson___version' |
+  'pluginCreator___packageJson___main' |
+  'pluginCreator___packageJson___author' |
+  'pluginCreator___packageJson___license' |
+  'pluginCreator___packageJson___dependencies' |
+  'pluginCreator___packageJson___dependencies___name' |
+  'pluginCreator___packageJson___dependencies___version' |
+  'pluginCreator___packageJson___devDependencies' |
+  'pluginCreator___packageJson___devDependencies___name' |
+  'pluginCreator___packageJson___devDependencies___version' |
+  'pluginCreator___packageJson___peerDependencies' |
+  'pluginCreator___packageJson___peerDependencies___name' |
+  'pluginCreator___packageJson___peerDependencies___version' |
+  'pluginCreator___packageJson___keywords' |
+  'pluginCreatorId' |
+  'componentPath';
 
 export type SitePageFilterInput = {
   path?: Maybe<StringQueryOperatorInput>;
@@ -1589,15 +1580,15 @@ export type SitePageFilterInput = {
   internalComponentName?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   matchPath?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>;
   context?: Maybe<SitePageContextFilterInput>;
   pluginCreator?: Maybe<SitePluginFilterInput>;
   pluginCreatorId?: Maybe<StringQueryOperatorInput>;
   componentPath?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
 };
 
 export type SitePageGroupConnection = {
@@ -1625,6 +1616,7 @@ export type SitePlugin = Node & {
   pluginOptions?: Maybe<SitePluginPluginOptions>;
   nodeAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
   browserAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  ssrAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
   pluginFilepath?: Maybe<Scalars['String']>;
   packageJson?: Maybe<SitePluginPackageJson>;
 };
@@ -1746,22 +1738,6 @@ export type SitePluginFieldsEnum =
   'resolve' |
   'name' |
   'version' |
-  'pluginOptions___plugins' |
-  'pluginOptions___plugins___resolve' |
-  'pluginOptions___plugins___id' |
-  'pluginOptions___plugins___name' |
-  'pluginOptions___plugins___version' |
-  'pluginOptions___plugins___pluginOptions___baseUrl' |
-  'pluginOptions___plugins___pluginOptions___protocol' |
-  'pluginOptions___plugins___pluginOptions___maxWidth' |
-  'pluginOptions___plugins___pluginOptions___wrapperStyle' |
-  'pluginOptions___plugins___pluginOptions___backgroundColor' |
-  'pluginOptions___plugins___pluginOptions___postTypes' |
-  'pluginOptions___plugins___pluginOptions___withWebp' |
-  'pluginOptions___plugins___pluginOptions___useACF' |
-  'pluginOptions___plugins___nodeAPIs' |
-  'pluginOptions___plugins___browserAPIs' |
-  'pluginOptions___plugins___pluginFilepath' |
   'pluginOptions___fileName' |
   'pluginOptions___baseUrl' |
   'pluginOptions___protocol' |
@@ -1771,15 +1747,17 @@ export type SitePluginFieldsEnum =
   'pluginOptions___verboseOutput' |
   'pluginOptions___perPage' |
   'pluginOptions___includedRoutes' |
-  'pluginOptions___maxWidth' |
-  'pluginOptions___wrapperStyle' |
-  'pluginOptions___backgroundColor' |
-  'pluginOptions___postTypes' |
-  'pluginOptions___withWebp' |
+  'pluginOptions___name' |
+  'pluginOptions___short_name' |
+  'pluginOptions___start_url' |
+  'pluginOptions___background_color' |
+  'pluginOptions___theme_color' |
+  'pluginOptions___display' |
   'pluginOptions___path' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
   'browserAPIs' |
+  'ssrAPIs' |
   'pluginFilepath' |
   'packageJson___name' |
   'packageJson___description' |
@@ -1809,6 +1787,7 @@ export type SitePluginFilterInput = {
   pluginOptions?: Maybe<SitePluginPluginOptionsFilterInput>;
   nodeAPIs?: Maybe<StringQueryOperatorInput>;
   browserAPIs?: Maybe<StringQueryOperatorInput>;
+  ssrAPIs?: Maybe<StringQueryOperatorInput>;
   pluginFilepath?: Maybe<StringQueryOperatorInput>;
   packageJson?: Maybe<SitePluginPackageJsonFilterInput>;
 };
@@ -1891,7 +1870,6 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
-  plugins?: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
   fileName?: Maybe<Scalars['String']>;
   baseUrl?: Maybe<Scalars['String']>;
   protocol?: Maybe<Scalars['String']>;
@@ -1901,17 +1879,17 @@ export type SitePluginPluginOptions = {
   verboseOutput?: Maybe<Scalars['Boolean']>;
   perPage?: Maybe<Scalars['Int']>;
   includedRoutes?: Maybe<Array<Maybe<Scalars['String']>>>;
-  maxWidth?: Maybe<Scalars['Int']>;
-  wrapperStyle?: Maybe<Scalars['String']>;
-  backgroundColor?: Maybe<Scalars['String']>;
-  postTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
-  withWebp?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  short_name?: Maybe<Scalars['String']>;
+  start_url?: Maybe<Scalars['String']>;
+  background_color?: Maybe<Scalars['String']>;
+  theme_color?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
-  plugins?: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
   fileName?: Maybe<StringQueryOperatorInput>;
   baseUrl?: Maybe<StringQueryOperatorInput>;
   protocol?: Maybe<StringQueryOperatorInput>;
@@ -1921,61 +1899,14 @@ export type SitePluginPluginOptionsFilterInput = {
   verboseOutput?: Maybe<BooleanQueryOperatorInput>;
   perPage?: Maybe<IntQueryOperatorInput>;
   includedRoutes?: Maybe<StringQueryOperatorInput>;
-  maxWidth?: Maybe<IntQueryOperatorInput>;
-  wrapperStyle?: Maybe<StringQueryOperatorInput>;
-  backgroundColor?: Maybe<StringQueryOperatorInput>;
-  postTypes?: Maybe<StringQueryOperatorInput>;
-  withWebp?: Maybe<BooleanQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  short_name?: Maybe<StringQueryOperatorInput>;
+  start_url?: Maybe<StringQueryOperatorInput>;
+  background_color?: Maybe<StringQueryOperatorInput>;
+  theme_color?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
-};
-
-export type SitePluginPluginOptionsPlugins = {
-  resolve?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  version?: Maybe<Scalars['String']>;
-  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptions>;
-  nodeAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
-  browserAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
-  pluginFilepath?: Maybe<Scalars['String']>;
-};
-
-export type SitePluginPluginOptionsPluginsFilterInput = {
-  resolve?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  name?: Maybe<StringQueryOperatorInput>;
-  version?: Maybe<StringQueryOperatorInput>;
-  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>;
-  nodeAPIs?: Maybe<StringQueryOperatorInput>;
-  browserAPIs?: Maybe<StringQueryOperatorInput>;
-  pluginFilepath?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePluginPluginOptionsPluginsFilterListInput = {
-  elemMatch?: Maybe<SitePluginPluginOptionsPluginsFilterInput>;
-};
-
-export type SitePluginPluginOptionsPluginsPluginOptions = {
-  baseUrl?: Maybe<Scalars['String']>;
-  protocol?: Maybe<Scalars['String']>;
-  maxWidth?: Maybe<Scalars['Int']>;
-  wrapperStyle?: Maybe<Scalars['String']>;
-  backgroundColor?: Maybe<Scalars['String']>;
-  postTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
-  withWebp?: Maybe<Scalars['Boolean']>;
-  useACF?: Maybe<Scalars['Boolean']>;
-};
-
-export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
-  baseUrl?: Maybe<StringQueryOperatorInput>;
-  protocol?: Maybe<StringQueryOperatorInput>;
-  maxWidth?: Maybe<IntQueryOperatorInput>;
-  wrapperStyle?: Maybe<StringQueryOperatorInput>;
-  backgroundColor?: Maybe<StringQueryOperatorInput>;
-  postTypes?: Maybe<StringQueryOperatorInput>;
-  withWebp?: Maybe<BooleanQueryOperatorInput>;
-  useACF?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {

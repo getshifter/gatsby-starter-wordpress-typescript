@@ -51,5 +51,17 @@ module.exports = {
         ]
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `WPGatsby Example`,
+        short_name: `WPGatsby`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#00bfff`,
+        display: `standalone`,
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 }

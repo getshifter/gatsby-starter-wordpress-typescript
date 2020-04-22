@@ -72,3 +72,40 @@ Generated HTML will be placed in `public` directory.
 ## Deploy
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/getshifter/gatsby-starter-wordpress-typescript)
+
+## PWA
+
+The example provides PWA by using `gatsby-plugin-manifest` and `gatsby-plugin-offline`.
+You can check the application icons in the `static/icons` directory.
+
+```bash
+% tree st   i
+/icons atic/
+static/icons
+├── icon-128x128.png
+├── icon-144x144.png
+├── icon-152x152.png
+├── icon-192x192.png
+├── icon-384x384.png
+├── icon-512x512.png
+├── icon-72x72.png
+└── icon-96x96.png
+
+1 directory, 8 files
+```
+
+And manifest.json's content are in `gatsby-config.js`.
+
+```javascript
+ {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `WPGatsby Example`,
+        short_name: `WPGatsby`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#00bfff`,
+        display: `standalone`,
+      },
+ },
+```
