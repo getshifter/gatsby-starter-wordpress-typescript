@@ -3240,7 +3240,12 @@ export type Wordpress__Site_MetadataSortInput = {
 export type Unnamed_1_QueryVariables = {};
 
 
-export type Unnamed_1_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'name' | 'url'>> };
+export type Unnamed_1_Query = { allWordpressPage: { edges: Array<{ node: Pick<Wordpress__Page, 'title' | 'slug'> }> } };
+
+export type Unnamed_2_QueryVariables = {};
+
+
+export type Unnamed_2_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'name' | 'url'>> };
 
 export type IndexQueryVariables = {};
 
