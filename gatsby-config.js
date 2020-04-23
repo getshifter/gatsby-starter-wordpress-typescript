@@ -1,7 +1,7 @@
 
 module.exports = {
   siteMetadata: {
-    postURLPrefix: 'news',
+    postURLPrefix: 'blogs',
     pageURLPrefix: '',
   },
   plugins: [
@@ -20,7 +20,7 @@ module.exports = {
          * The base URL of the WordPress site without the trailingslash and the protocol. This is required.
          * Example : 'demo.wp-api.org' or 'www.example-site.com'
          */
-        baseUrl: "central.wordcamp.org",
+        baseUrl: "b5d85ac952f05c2bcb7e0b42979eff431beac2f1.hl-a.getshifter.co",
         // The protocol. This can be http or https.
         protocol: "https",
         // The rest api route prefix that your WordPress site is using.
