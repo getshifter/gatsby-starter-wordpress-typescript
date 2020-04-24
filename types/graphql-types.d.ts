@@ -1380,11 +1380,25 @@ export type SitePageConnectionGroupArgs = {
 };
 
 export type SitePageContext = {
+  pageNumber?: Maybe<Scalars['Int']>;
+  humanPageNumber?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  numberOfPages?: Maybe<Scalars['Int']>;
+  previousPagePath?: Maybe<Scalars['String']>;
+  nextPagePath?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
+  pageNumber?: Maybe<IntQueryOperatorInput>;
+  humanPageNumber?: Maybe<IntQueryOperatorInput>;
+  skip?: Maybe<IntQueryOperatorInput>;
+  limit?: Maybe<IntQueryOperatorInput>;
+  numberOfPages?: Maybe<IntQueryOperatorInput>;
+  previousPagePath?: Maybe<StringQueryOperatorInput>;
+  nextPagePath?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
 };
@@ -1488,6 +1502,13 @@ export type SitePageFieldsEnum =
   'internal___owner' |
   'internal___type' |
   'isCreatedByStatefulCreatePages' |
+  'context___pageNumber' |
+  'context___humanPageNumber' |
+  'context___skip' |
+  'context___limit' |
+  'context___numberOfPages' |
+  'context___previousPagePath' |
+  'context___nextPagePath' |
   'context___slug' |
   'context___id' |
   'pluginCreator___id' |
@@ -3187,11 +3208,6 @@ export type Unnamed_2_QueryVariables = {};
 
 export type Unnamed_2_Query = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'name'>> };
 
-export type IndexQueryVariables = {};
-
-
-export type IndexQuery = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'id' | 'home' | 'description' | 'name' | 'url'>>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug' | 'date' | 'modified'> }> } };
-
 export type SinglePageQueryVariables = {
   slug?: Maybe<Scalars['String']>;
 };
@@ -3205,3 +3221,11 @@ export type SinglePostQueryVariables = {
 
 
 export type SinglePostQuery = { wordpressPost?: Maybe<Pick<Wordpress__Post, 'id' | 'slug' | 'title' | 'content'>> };
+
+export type IndexQueryVariables = {
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+};
+
+
+export type IndexQuery = { wordpressSiteMetadata?: Maybe<Pick<Wordpress__Site_Metadata, 'id' | 'home' | 'description' | 'name' | 'url'>>, allWordpressPost: { edges: Array<{ node: Pick<Wordpress__Post, 'title' | 'excerpt' | 'slug' | 'date' | 'modified'> }> } };

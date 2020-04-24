@@ -12,16 +12,21 @@ import {
 import {
   IndexQuery
 } from '../../types/graphql-types'
+import {
+  PageContextProps
+} from '../../types/gatsby-awesome-pagination'
 import { getPostRelativePath } from '../helpers/url'
 import Main from '../components/Main'
 import Jumbotron from '../components/Jumbotron'
 import Footer from '../layouts/Footer'
 import Layout from '../layouts/index'
+import Pagination from '../components/Pagination'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 interface IndexPageProps {
   data: IndexQuery
+  pageContext: PageContextProps
 }
 
 const ListPostItem = (props: IndexQuery['allWordpressPost']['edges'][number]['node']) => {
@@ -46,7 +51,8 @@ const ListPostItem = (props: IndexQuery['allWordpressPost']['edges'][number]['no
   )
 }
 
-export default ({data}: IndexPageProps) => {
+export default (props: IndexPageProps) => {
+  const { data } = props;
   const {edges } = data.allWordpressPost
     return (
       <Layout>
@@ -61,6 +67,7 @@ export default ({data}: IndexPageProps) => {
           <Row>
           {edges.map(({node}) => <ListPostItem {...node} key={node.title} />)}
           </Row>
+          <Pagination {...props} />
         </Main>
         <Footer />
       </Layout>
@@ -69,7 +76,7 @@ export default ({data}: IndexPageProps) => {
 
 
 export const pageQuery = graphql`
-  query Index {
+  query Index($skip: Int!, $limit: Int!) {
     wordpressSiteMetadata {
       id
       home
@@ -77,7 +84,10 @@ export const pageQuery = graphql`
       name
       url
     }
-    allWordpressPost {
+    allWordpressPost(
+      skip: $skip
+      limit: $limit
+    ) {
       edges {
         node {
           title
