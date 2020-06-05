@@ -9,6 +9,10 @@ Install this starter (assuming Gatsby is installed) by running from your CLI:
 
 ```
 $ gatsby new gatsby-wordpress https://github.com/getshifter/gatsby-starter-wordpress-typescript
+
+or
+
+$  npx gatsby-cli new gatsby-wordpress https://github.com/getshifter/gatsby-starter-wordpress-typescript
 ```
 
 ### Set your WordPress URL
