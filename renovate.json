@@ -4,6 +4,10 @@
   ],
   "timezone": "Asia/Tokyo",
   "schedule": ["every weekend"],
+  "automerge": true,
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
