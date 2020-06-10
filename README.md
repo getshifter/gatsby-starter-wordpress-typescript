@@ -7,10 +7,10 @@ Install this starter (assuming Gatsby is installed) by running from your CLI:
 
 You can deploy the demo site to the following services.
 
-[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/getshifter/gatsby-starter-wordpress-typescript/)
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/getshifter/gatsby-starter-wordpress-typescript)
 
 
-[![netlifybutton](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/getshifter/gatsby-starter-wordpress-typescript/)
+[![netlifybutton](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/getshifter/gatsby-starter-wordpress-typescript)
 
 
 ## Getting started
