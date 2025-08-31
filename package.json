@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Shifter Team <hello@getshifter.io>",
   "dependencies": {
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^5.0.0",
     "gatsby": "^2.20.27",
     "gatsby-awesome-pagination": "^0.3.5",
     "gatsby-link": "^2.3.4",
