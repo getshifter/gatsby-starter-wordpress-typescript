@@ -5607,11 +5607,11 @@ functional-red-black-tree@^1.0.1:
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
 gatsby-awesome-pagination@^0.3.5:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.6.tgz#e7e2d0af0cebd53a51957414e1e9749f2e0e2c02"
-  integrity sha512-gVt5tnDP8Va+Y02OrG8k/HocGx7NKTnvGGKFzz2E+ChHObBbac6PXeOEOUseFrCqO/zKLhF8JWTfWofGsy7oQA==
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.8.tgz#e50f048ed9b25aecf5e2cd7269cdbd77f168301f"
+  integrity sha512-Bnf2rncqjyhQeye8w+OVK8wmgu/Y77HI8Po05oEqbCSd+fMd0uGDv6ZhKH7UU/xcTv2cbJm7ie+Px9t41ngAxg==
   dependencies:
-    lodash "^4.17.15"
+    lodash "^4.17.21"
 
 gatsby-cli@^2.12.115:
   version "2.12.115"
@@ -7921,6 +7921,11 @@ lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.1
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+
+lodash@^4.17.21:
+  version "4.18.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.18.1.tgz#ff2b66c1f6326d59513de2407bf881439812771c"
+  integrity sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==
 
 loglevel@^1.6.8:
   version "1.7.0"
